@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.FwsTimeMapper">  
+    <resultMap type="com.bky.model.FwsTime" id="FwsTimeResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="fwsId" column="fws_id" />        
+        <result property="zhouId" column="zhou_id" />        
+        <result property="timebId" column="timeb_id" />         
+    </resultMap>
+	
+    <insert id="insertFwsTime" parameterType="com.bky.model.FwsTime"  >
+    	insert into fws_time
+    	(
+    	
+    		tid,    	
+    		fws_id,    	
+    		zhou_id,    	
+    		timeb_id    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{fwsId,jdbcType=VARCHAR},    	
+			#{zhouId,jdbcType=VARCHAR},    	
+			#{timebId,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertFwsTimes" parameterType="ArrayList" flushCache="true">
+    	insert into fws_time
+    	(
+    		
+    		tid,    		
+    		fws_id,    		
+    		zhou_id,    		
+    		timeb_id    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.fwsId,jdbcType=VARCHAR},    		
+			#{item.zhouId,jdbcType=VARCHAR},    		
+			#{item.timebId,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateFwsTime" parameterType="com.bky.model.FwsTime" flushCache="true">
+  		update fws_time
+  	set 
+  	
+  		   	
+  		fws_id = #{fwsId,jdbcType=VARCHAR},  	
+  		zhou_id = #{zhouId,jdbcType=VARCHAR},  	
+  		timeb_id = #{timebId,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteFwsTime" parameterType="com.bky.model.FwsTime" flushCache="true">
+  		delete from fws_time where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="fwsId!=null and fwsId != ''">
+  			or fws_id = #{fwsId}
+  		</if>
+  	  		
+  		<if test="zhouId!=null and zhouId != ''">
+  			or zhou_id = #{zhouId}
+  		</if>
+  	  		
+  		<if test="timebId!=null and timebId != ''">
+  			or timeb_id = #{timebId}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryFwsTimes" parameterType="com.bky.model.FwsTime" resultMap="FwsTimeResultMap">
+    	select * from fws_time where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like '%${ fwsId }%'
+    	</if>
+    	    	    	
+    	<if test="zhouId != null and zhouId != ''">  
+    		 and zhou_id like '%${ zhouId }%'
+    	</if>
+    	    	    	
+    	<if test="timebId != null and timebId != ''">  
+    		 and timeb_id like '%${ timebId }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryFwsTimesByPage" parameterType="com.bky.model.FwsTime" resultMap="FwsTimeResultMap">
+    	select * from  fws_time where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like  '%${ fwsId }%' 
+    	</if>
+    	    	    	
+    	<if test="zhouId != null and zhouId != ''">  
+    		 and zhou_id like  '%${ zhouId }%' 
+    	</if>
+    	    	    	
+    	<if test="timebId != null and timebId != ''">  
+    		 and timeb_id like  '%${ timebId }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryFwsTimeById" parameterType="HashMap" resultMap="FwsTimeResultMap">
+   	 	select * from fws_time where  tid = #{fwsTimeId}  
+    </select>
+    
+    <select id="getFwsTimeCount" parameterType="com.bky.model.FwsTime" resultType="Integer">
+   	 	select count(*) from fws_time where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like '%${ fwsId }%'
+    	</if>
+    	    	    	
+    	<if test="zhouId != null and zhouId != ''">  
+    		 and zhou_id like '%${ zhouId }%'
+    	</if>
+    	    	    	
+    	<if test="timebId != null and timebId != ''">  
+    		 and timeb_id like '%${ timebId }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

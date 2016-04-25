@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.KehuMapper">  
+    <resultMap type="com.bky.model.Kehu" id="KehuResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="name" column="name" />        
+        <result property="phone" column="phone" />        
+        <result property="address" column="address" />        
+        <result property="yue" column="yue" />        
+        <result property="fx" column="fx" />        
+        <result property="mj" column="mj" />        
+        <result property="state" column="state" />         
+    </resultMap>
+	
+    <insert id="insertKehu" parameterType="com.bky.model.Kehu"  >
+    	insert into kehu
+    	(
+    	
+    		tid,    	
+    		name,    	
+    		phone,    	
+    		address,    	
+    		yue,    	
+    		fx,    	
+    		mj,    	
+    		state    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{name,jdbcType=VARCHAR},    	
+			#{phone,jdbcType=VARCHAR},    	
+			#{address,jdbcType=VARCHAR},    	
+			#{yue,jdbcType=VARCHAR},    	
+			#{fx,jdbcType=VARCHAR},    	
+			#{mj,jdbcType=VARCHAR},    	
+			#{state,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertKehus" parameterType="ArrayList" flushCache="true">
+    	insert into kehu
+    	(
+    		
+    		tid,    		
+    		name,    		
+    		phone,    		
+    		address,    		
+    		yue,    		
+    		fx,    		
+    		mj,    		
+    		state    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.name,jdbcType=VARCHAR},    		
+			#{item.phone,jdbcType=VARCHAR},    		
+			#{item.address,jdbcType=VARCHAR},    		
+			#{item.yue,jdbcType=VARCHAR},    		
+			#{item.fx,jdbcType=VARCHAR},    		
+			#{item.mj,jdbcType=VARCHAR},    		
+			#{item.state,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateKehu" parameterType="com.bky.model.Kehu" flushCache="true">
+  		update kehu
+  	set 
+  	
+  		   	
+  		name = #{name,jdbcType=VARCHAR},  	
+  		phone = #{phone,jdbcType=VARCHAR},  	
+  		address = #{address,jdbcType=VARCHAR},  	
+  		yue = #{yue,jdbcType=VARCHAR},  	
+  		fx = #{fx,jdbcType=VARCHAR},  	
+  		mj = #{mj,jdbcType=VARCHAR},  	
+  		state = #{state,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteKehu" parameterType="com.bky.model.Kehu" flushCache="true">
+  		delete from kehu where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="name!=null and name != ''">
+  			or name = #{name}
+  		</if>
+  	  		
+  		<if test="phone!=null and phone != ''">
+  			or phone = #{phone}
+  		</if>
+  	  		
+  		<if test="address!=null and address != ''">
+  			or address = #{address}
+  		</if>
+  	  		
+  		<if test="yue!=null and yue != ''">
+  			or yue = #{yue}
+  		</if>
+  	  		
+  		<if test="fx!=null and fx != ''">
+  			or fx = #{fx}
+  		</if>
+  	  		
+  		<if test="mj!=null and mj != ''">
+  			or mj = #{mj}
+  		</if>
+  	  		
+  		<if test="state!=null and state != ''">
+  			or state = #{state}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryKehus" parameterType="com.bky.model.Kehu" resultMap="KehuResultMap">
+    	select * from kehu where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="name != null and name != ''">  
+    		 and name like '%${ name }%'
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like '%${ phone }%'
+    	</if>
+    	    	    	
+    	<if test="address != null and address != ''">  
+    		 and address like '%${ address }%'
+    	</if>
+    	    	    	
+    	<if test="yue != null and yue != ''">  
+    		 and yue like '%${ yue }%'
+    	</if>
+    	    	    	
+    	<if test="fx != null and fx != ''">  
+    		 and fx like '%${ fx }%'
+    	</if>
+    	    	    	
+    	<if test="mj != null and mj != ''">  
+    		 and mj like '%${ mj }%'
+    	</if>
+    	    	    	
+    	<if test="state != null and state != ''">  
+    		 and state like '%${ state }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryKehusByPage" parameterType="com.bky.model.Kehu" resultMap="KehuResultMap">
+    	select * from  kehu where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="name != null and name != ''">  
+    		 and name like  '%${ name }%' 
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like  '%${ phone }%' 
+    	</if>
+    	    	    	
+    	<if test="address != null and address != ''">  
+    		 and address like  '%${ address }%' 
+    	</if>
+    	    	    	
+    	<if test="yue != null and yue != ''">  
+    		 and yue like  '%${ yue }%' 
+    	</if>
+    	    	    	
+    	<if test="fx != null and fx != ''">  
+    		 and fx like  '%${ fx }%' 
+    	</if>
+    	    	    	
+    	<if test="mj != null and mj != ''">  
+    		 and mj like  '%${ mj }%' 
+    	</if>
+    	    	    	
+    	<if test="state != null and state != ''">  
+    		 and state like  '%${ state }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryKehuById" parameterType="HashMap" resultMap="KehuResultMap">
+   	 	select * from kehu where  tid = #{kehuId}  
+    </select>
+    
+    <select id="getKehuCount" parameterType="com.bky.model.Kehu" resultType="Integer">
+   	 	select count(*) from kehu where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="name != null and name != ''">  
+    		 and name like '%${ name }%'
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like '%${ phone }%'
+    	</if>
+    	    	    	
+    	<if test="address != null and address != ''">  
+    		 and address like '%${ address }%'
+    	</if>
+    	    	    	
+    	<if test="yue != null and yue != ''">  
+    		 and yue like '%${ yue }%'
+    	</if>
+    	    	    	
+    	<if test="fx != null and fx != ''">  
+    		 and fx like '%${ fx }%'
+    	</if>
+    	    	    	
+    	<if test="mj != null and mj != ''">  
+    		 and mj like '%${ mj }%'
+    	</if>
+    	    	    	
+    	<if test="state != null and state != ''">  
+    		 and state like '%${ state }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

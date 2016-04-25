@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.TimebMapper">  
+    <resultMap type="com.bky.model.Timeb" id="TimebResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="sj" column="sj" />         
+    </resultMap>
+	
+    <insert id="insertTimeb" parameterType="com.bky.model.Timeb"  >
+    	insert into timeb
+    	(
+    	
+    		tid,    	
+    		sj    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{sj,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertTimebs" parameterType="ArrayList" flushCache="true">
+    	insert into timeb
+    	(
+    		
+    		tid,    		
+    		sj    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.sj,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateTimeb" parameterType="com.bky.model.Timeb" flushCache="true">
+  		update timeb
+  	set 
+  	
+  		   	
+  		sj = #{sj,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteTimeb" parameterType="com.bky.model.Timeb" flushCache="true">
+  		delete from timeb where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="sj!=null and sj != ''">
+  			or sj = #{sj}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryTimebs" parameterType="com.bky.model.Timeb" resultMap="TimebResultMap">
+    	select * from timeb where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="sj != null and sj != ''">  
+    		 and sj like '%${ sj }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryTimebsByPage" parameterType="com.bky.model.Timeb" resultMap="TimebResultMap">
+    	select * from  timeb where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="sj != null and sj != ''">  
+    		 and sj like  '%${ sj }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryTimebById" parameterType="HashMap" resultMap="TimebResultMap">
+   	 	select * from timeb where  tid = #{timebId}  
+    </select>
+    
+    <select id="getTimebCount" parameterType="com.bky.model.Timeb" resultType="Integer">
+   	 	select count(*) from timeb where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="sj != null and sj != ''">  
+    		 and sj like '%${ sj }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.OrderinfoMapper">  
+    <resultMap type="com.bky.model.Orderinfo" id="OrderinfoResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="sjId" column="sj_id" />        
+        <result property="project" column="project" />        
+        <result property="content" column="content" />         
+    </resultMap>
+	
+    <insert id="insertOrderinfo" parameterType="com.bky.model.Orderinfo"  >
+    	insert into orderInfo
+    	(
+    	
+    		tid,    	
+    		sj_id,    	
+    		project,    	
+    		content    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{sjId,jdbcType=VARCHAR},    	
+			#{project,jdbcType=VARCHAR},    	
+			#{content,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertOrderinfos" parameterType="ArrayList" flushCache="true">
+    	insert into orderInfo
+    	(
+    		
+    		tid,    		
+    		sj_id,    		
+    		project,    		
+    		content    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.sjId,jdbcType=VARCHAR},    		
+			#{item.project,jdbcType=VARCHAR},    		
+			#{item.content,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateOrderinfo" parameterType="com.bky.model.Orderinfo" flushCache="true">
+  		update orderInfo
+  	set 
+  	
+  		   	
+  		sj_id = #{sjId,jdbcType=VARCHAR},  	
+  		project = #{project,jdbcType=VARCHAR},  	
+  		content = #{content,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteOrderinfo" parameterType="com.bky.model.Orderinfo" flushCache="true">
+  		delete from orderInfo where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="sjId!=null and sjId != ''">
+  			or sj_id = #{sjId}
+  		</if>
+  	  		
+  		<if test="project!=null and project != ''">
+  			or project = #{project}
+  		</if>
+  	  		
+  		<if test="content!=null and content != ''">
+  			or content = #{content}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryOrderinfos" parameterType="com.bky.model.Orderinfo" resultMap="OrderinfoResultMap">
+    	select * from orderInfo where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="sjId != null and sjId != ''">  
+    		 and sj_id like '%${ sjId }%'
+    	</if>
+    	    	    	
+    	<if test="project != null and project != ''">  
+    		 and project like '%${ project }%'
+    	</if>
+    	    	    	
+    	<if test="content != null and content != ''">  
+    		 and content like '%${ content }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryOrderinfosByPage" parameterType="com.bky.model.Orderinfo" resultMap="OrderinfoResultMap">
+    	select * from  orderInfo where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="sjId != null and sjId != ''">  
+    		 and sj_id like  '%${ sjId }%' 
+    	</if>
+    	    	    	
+    	<if test="project != null and project != ''">  
+    		 and project like  '%${ project }%' 
+    	</if>
+    	    	    	
+    	<if test="content != null and content != ''">  
+    		 and content like  '%${ content }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryOrderinfoById" parameterType="HashMap" resultMap="OrderinfoResultMap">
+   	 	select * from orderInfo where  tid = #{orderinfoId}  
+    </select>
+    
+    <select id="getOrderinfoCount" parameterType="com.bky.model.Orderinfo" resultType="Integer">
+   	 	select count(*) from orderInfo where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="sjId != null and sjId != ''">  
+    		 and sj_id like '%${ sjId }%'
+    	</if>
+    	    	    	
+    	<if test="project != null and project != ''">  
+    		 and project like '%${ project }%'
+    	</if>
+    	    	    	
+    	<if test="content != null and content != ''">  
+    		 and content like '%${ content }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.RecordMapper">  
+    <resultMap type="com.bky.model.Record" id="RecordResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="kehuId" column="kehu_id" />        
+        <result property="fwsId" column="fws_id" />        
+        <result property="address" column="address" />        
+        <result property="project" column="project" />        
+        <result property="fwsj" column="fwsj" />        
+        <result property="fwhouse" column="fwhouse" />        
+        <result property="kehuyj" column="kehuyj" />        
+        <result property="kehuqz" column="kehuqz" />        
+        <result property="qr" column="qr" />         
+    </resultMap>
+	
+    <insert id="insertRecord" parameterType="com.bky.model.Record"  >
+    	insert into record
+    	(
+    	
+    		tid,    	
+    		kehu_id,    	
+    		fws_id,    	
+    		address,    	
+    		project,    	
+    		fwsj,    	
+    		fwhouse,    	
+    		kehuyj,    	
+    		kehuqz,    	
+    		qr    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{kehuId,jdbcType=VARCHAR},    	
+			#{fwsId,jdbcType=VARCHAR},    	
+			#{address,jdbcType=VARCHAR},    	
+			#{project,jdbcType=VARCHAR},    	
+			#{fwsj,jdbcType=VARCHAR},    	
+			#{fwhouse,jdbcType=VARCHAR},    	
+			#{kehuyj,jdbcType=VARCHAR},    	
+			#{kehuqz,jdbcType=VARCHAR},    	
+			#{qr,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertRecords" parameterType="ArrayList" flushCache="true">
+    	insert into record
+    	(
+    		
+    		tid,    		
+    		kehu_id,    		
+    		fws_id,    		
+    		address,    		
+    		project,    		
+    		fwsj,    		
+    		fwhouse,    		
+    		kehuyj,    		
+    		kehuqz,    		
+    		qr    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.kehuId,jdbcType=VARCHAR},    		
+			#{item.fwsId,jdbcType=VARCHAR},    		
+			#{item.address,jdbcType=VARCHAR},    		
+			#{item.project,jdbcType=VARCHAR},    		
+			#{item.fwsj,jdbcType=VARCHAR},    		
+			#{item.fwhouse,jdbcType=VARCHAR},    		
+			#{item.kehuyj,jdbcType=VARCHAR},    		
+			#{item.kehuqz,jdbcType=VARCHAR},    		
+			#{item.qr,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateRecord" parameterType="com.bky.model.Record" flushCache="true">
+  		update record
+  	set 
+  	
+  		   	
+  		kehu_id = #{kehuId,jdbcType=VARCHAR},  	
+  		fws_id = #{fwsId,jdbcType=VARCHAR},  	
+  		address = #{address,jdbcType=VARCHAR},  	
+  		project = #{project,jdbcType=VARCHAR},  	
+  		fwsj = #{fwsj,jdbcType=VARCHAR},  	
+  		fwhouse = #{fwhouse,jdbcType=VARCHAR},  	
+  		kehuyj = #{kehuyj,jdbcType=VARCHAR},  	
+  		kehuqz = #{kehuqz,jdbcType=VARCHAR},  	
+  		qr = #{qr,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteRecord" parameterType="com.bky.model.Record" flushCache="true">
+  		delete from record where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="kehuId!=null and kehuId != ''">
+  			or kehu_id = #{kehuId}
+  		</if>
+  	  		
+  		<if test="fwsId!=null and fwsId != ''">
+  			or fws_id = #{fwsId}
+  		</if>
+  	  		
+  		<if test="address!=null and address != ''">
+  			or address = #{address}
+  		</if>
+  	  		
+  		<if test="project!=null and project != ''">
+  			or project = #{project}
+  		</if>
+  	  		
+  		<if test="fwsj!=null and fwsj != ''">
+  			or fwsj = #{fwsj}
+  		</if>
+  	  		
+  		<if test="fwhouse!=null and fwhouse != ''">
+  			or fwhouse = #{fwhouse}
+  		</if>
+  	  		
+  		<if test="kehuyj!=null and kehuyj != ''">
+  			or kehuyj = #{kehuyj}
+  		</if>
+  	  		
+  		<if test="kehuqz!=null and kehuqz != ''">
+  			or kehuqz = #{kehuqz}
+  		</if>
+  	  		
+  		<if test="qr!=null and qr != ''">
+  			or qr = #{qr}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryRecords" parameterType="com.bky.model.Record" resultMap="RecordResultMap">
+    	select * from record where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like '%${ kehuId }%'
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like '%${ fwsId }%'
+    	</if>
+    	    	    	
+    	<if test="address != null and address != ''">  
+    		 and address like '%${ address }%'
+    	</if>
+    	    	    	
+    	<if test="project != null and project != ''">  
+    		 and project like '%${ project }%'
+    	</if>
+    	    	    	
+    	<if test="fwsj != null and fwsj != ''">  
+    		 and fwsj like '%${ fwsj }%'
+    	</if>
+    	    	    	
+    	<if test="fwhouse != null and fwhouse != ''">  
+    		 and fwhouse like '%${ fwhouse }%'
+    	</if>
+    	    	    	
+    	<if test="kehuyj != null and kehuyj != ''">  
+    		 and kehuyj like '%${ kehuyj }%'
+    	</if>
+    	    	    	
+    	<if test="kehuqz != null and kehuqz != ''">  
+    		 and kehuqz like '%${ kehuqz }%'
+    	</if>
+    	    	    	
+    	<if test="qr != null and qr != ''">  
+    		 and qr like '%${ qr }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryRecordsByPage" parameterType="com.bky.model.Record" resultMap="RecordResultMap">
+    	select * from  record where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like  '%${ kehuId }%' 
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like  '%${ fwsId }%' 
+    	</if>
+    	    	    	
+    	<if test="address != null and address != ''">  
+    		 and address like  '%${ address }%' 
+    	</if>
+    	    	    	
+    	<if test="project != null and project != ''">  
+    		 and project like  '%${ project }%' 
+    	</if>
+    	    	    	
+    	<if test="fwsj != null and fwsj != ''">  
+    		 and fwsj like  '%${ fwsj }%' 
+    	</if>
+    	    	    	
+    	<if test="fwhouse != null and fwhouse != ''">  
+    		 and fwhouse like  '%${ fwhouse }%' 
+    	</if>
+    	    	    	
+    	<if test="kehuyj != null and kehuyj != ''">  
+    		 and kehuyj like  '%${ kehuyj }%' 
+    	</if>
+    	    	    	
+    	<if test="kehuqz != null and kehuqz != ''">  
+    		 and kehuqz like  '%${ kehuqz }%' 
+    	</if>
+    	    	    	
+    	<if test="qr != null and qr != ''">  
+    		 and qr like  '%${ qr }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryRecordById" parameterType="HashMap" resultMap="RecordResultMap">
+   	 	select * from record where  tid = #{recordId}  
+    </select>
+    
+    <select id="getRecordCount" parameterType="com.bky.model.Record" resultType="Integer">
+   	 	select count(*) from record where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like '%${ kehuId }%'
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like '%${ fwsId }%'
+    	</if>
+    	    	    	
+    	<if test="address != null and address != ''">  
+    		 and address like '%${ address }%'
+    	</if>
+    	    	    	
+    	<if test="project != null and project != ''">  
+    		 and project like '%${ project }%'
+    	</if>
+    	    	    	
+    	<if test="fwsj != null and fwsj != ''">  
+    		 and fwsj like '%${ fwsj }%'
+    	</if>
+    	    	    	
+    	<if test="fwhouse != null and fwhouse != ''">  
+    		 and fwhouse like '%${ fwhouse }%'
+    	</if>
+    	    	    	
+    	<if test="kehuyj != null and kehuyj != ''">  
+    		 and kehuyj like '%${ kehuyj }%'
+    	</if>
+    	    	    	
+    	<if test="kehuqz != null and kehuqz != ''">  
+    		 and kehuqz like '%${ kehuqz }%'
+    	</if>
+    	    	    	
+    	<if test="qr != null and qr != ''">  
+    		 and qr like '%${ qr }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

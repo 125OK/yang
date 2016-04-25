@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.mapper.ZhouMapper">  
+    <resultMap type="com.bky.model.Zhou" id="ZhouResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="zhouji" column="zhouji" />         
+    </resultMap>
+	
+    <insert id="insertZhou" parameterType="com.bky.model.Zhou"  >
+    	insert into zhou
+    	(
+    	
+    		tid,    	
+    		zhouji    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{zhouji,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertZhous" parameterType="ArrayList" flushCache="true">
+    	insert into zhou
+    	(
+    		
+    		tid,    		
+    		zhouji    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.zhouji,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateZhou" parameterType="com.bky.model.Zhou" flushCache="true">
+  		update zhou
+  	set 
+  	
+  		   	
+  		zhouji = #{zhouji,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteZhou" parameterType="com.bky.model.Zhou" flushCache="true">
+  		delete from zhou where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="zhouji!=null and zhouji != ''">
+  			or zhouji = #{zhouji}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryZhous" parameterType="com.bky.model.Zhou" resultMap="ZhouResultMap">
+    	select * from zhou where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="zhouji != null and zhouji != ''">  
+    		 and zhouji like '%${ zhouji }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryZhousByPage" parameterType="com.bky.model.Zhou" resultMap="ZhouResultMap">
+    	select * from  zhou where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="zhouji != null and zhouji != ''">  
+    		 and zhouji like  '%${ zhouji }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryZhouById" parameterType="HashMap" resultMap="ZhouResultMap">
+   	 	select * from zhou where  tid = #{zhouId}  
+    </select>
+    
+    <select id="getZhouCount" parameterType="com.bky.model.Zhou" resultType="Integer">
+   	 	select count(*) from zhou where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="zhouji != null and zhouji != ''">  
+    		 and zhouji like '%${ zhouji }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

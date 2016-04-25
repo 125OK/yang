@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.FwsMapper">  
+    <resultMap type="com.bky.model.Fws" id="FwsResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="name" column="name" />        
+        <result property="age" column="age" />        
+        <result property="sex" column="sex" />        
+        <result property="gjy" column="gjy" />        
+        <result property="xdz" column="xdz" />        
+        <result property="phone" column="phone" />        
+        <result property="jiguan" column="jiguan" />        
+        <result property="birthday" column="birthday" />        
+        <result property="mz" column="mz" />        
+        <result property="sx" column="sx" />        
+        <result property="yuyan" column="yuyan" />        
+        <result property="shengao" column="shengao" />        
+        <result property="tizhong" column="tizhong" />        
+        <result property="xl" column="xl" />        
+        <result property="zs" column="zs" />        
+        <result property="lx" column="lx" />        
+        <result property="state" column="state" />        
+        <result property="money" column="money" />        
+        <result property="sfzh" column="sfzh" />        
+        <result property="sfzdz" column="sfzdz" />        
+        <result property="gzlx" column="gzlx" />        
+        <result property="des" column="des" />        
+        <result property="techang" column="techang" />        
+        <result property="xgtd" column="xgtd" />        
+        <result property="remark" column="remark" />         
+    </resultMap>
+	
+    <insert id="insertFws" parameterType="com.bky.model.Fws"  >
+    	insert into fws
+    	(
+    	
+    		tid,    	
+    		name,    	
+    		age,    	
+    		sex,    	
+    		gjy,    	
+    		xdz,    	
+    		phone,    	
+    		jiguan,    	
+    		birthday,    	
+    		mz,    	
+    		sx,    	
+    		yuyan,    	
+    		shengao,    	
+    		tizhong,    	
+    		xl,    	
+    		zs,    	
+    		lx,    	
+    		state,    	
+    		money,    	
+    		sfzh,    	
+    		sfzdz,    	
+    		gzlx,    	
+    		des,    	
+    		techang,    	
+    		xgtd,    	
+    		remark    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{name,jdbcType=VARCHAR},    	
+			#{age,jdbcType=VARCHAR},    	
+			#{sex,jdbcType=VARCHAR},    	
+			#{gjy,jdbcType=VARCHAR},    	
+			#{xdz,jdbcType=VARCHAR},    	
+			#{phone,jdbcType=VARCHAR},    	
+			#{jiguan,jdbcType=VARCHAR},    	
+			#{birthday,jdbcType=VARCHAR},    	
+			#{mz,jdbcType=VARCHAR},    	
+			#{sx,jdbcType=VARCHAR},    	
+			#{yuyan,jdbcType=VARCHAR},    	
+			#{shengao,jdbcType=VARCHAR},    	
+			#{tizhong,jdbcType=VARCHAR},    	
+			#{xl,jdbcType=VARCHAR},    	
+			#{zs,jdbcType=VARCHAR},    	
+			#{lx,jdbcType=VARCHAR},    	
+			#{state,jdbcType=VARCHAR},    	
+			#{money,jdbcType=VARCHAR},    	
+			#{sfzh,jdbcType=VARCHAR},    	
+			#{sfzdz,jdbcType=VARCHAR},    	
+			#{gzlx,jdbcType=VARCHAR},    	
+			#{des,jdbcType=VARCHAR},    	
+			#{techang,jdbcType=VARCHAR},    	
+			#{xgtd,jdbcType=VARCHAR},    	
+			#{remark,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertFwss" parameterType="ArrayList" flushCache="true">
+    	insert into fws
+    	(
+    		
+    		tid,    		
+    		name,    		
+    		age,    		
+    		sex,    		
+    		gjy,    		
+    		xdz,    		
+    		phone,    		
+    		jiguan,    		
+    		birthday,    		
+    		mz,    		
+    		sx,    		
+    		yuyan,    		
+    		shengao,    		
+    		tizhong,    		
+    		xl,    		
+    		zs,    		
+    		lx,    		
+    		state,    		
+    		money,    		
+    		sfzh,    		
+    		sfzdz,    		
+    		gzlx,    		
+    		des,    		
+    		techang,    		
+    		xgtd,    		
+    		remark    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.name,jdbcType=VARCHAR},    		
+			#{item.age,jdbcType=VARCHAR},    		
+			#{item.sex,jdbcType=VARCHAR},    		
+			#{item.gjy,jdbcType=VARCHAR},    		
+			#{item.xdz,jdbcType=VARCHAR},    		
+			#{item.phone,jdbcType=VARCHAR},    		
+			#{item.jiguan,jdbcType=VARCHAR},    		
+			#{item.birthday,jdbcType=VARCHAR},    		
+			#{item.mz,jdbcType=VARCHAR},    		
+			#{item.sx,jdbcType=VARCHAR},    		
+			#{item.yuyan,jdbcType=VARCHAR},    		
+			#{item.shengao,jdbcType=VARCHAR},    		
+			#{item.tizhong,jdbcType=VARCHAR},    		
+			#{item.xl,jdbcType=VARCHAR},    		
+			#{item.zs,jdbcType=VARCHAR},    		
+			#{item.lx,jdbcType=VARCHAR},    		
+			#{item.state,jdbcType=VARCHAR},    		
+			#{item.money,jdbcType=VARCHAR},    		
+			#{item.sfzh,jdbcType=VARCHAR},    		
+			#{item.sfzdz,jdbcType=VARCHAR},    		
+			#{item.gzlx,jdbcType=VARCHAR},    		
+			#{item.des,jdbcType=VARCHAR},    		
+			#{item.techang,jdbcType=VARCHAR},    		
+			#{item.xgtd,jdbcType=VARCHAR},    		
+			#{item.remark,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateFws" parameterType="com.bky.model.Fws" flushCache="true">
+  		update fws
+  	set 
+  	
+  		   	
+  		name = #{name,jdbcType=VARCHAR},  	
+  		age = #{age,jdbcType=VARCHAR},  	
+  		sex = #{sex,jdbcType=VARCHAR},  	
+  		gjy = #{gjy,jdbcType=VARCHAR},  	
+  		xdz = #{xdz,jdbcType=VARCHAR},  	
+  		phone = #{phone,jdbcType=VARCHAR},  	
+  		jiguan = #{jiguan,jdbcType=VARCHAR},  	
+  		birthday = #{birthday,jdbcType=VARCHAR},  	
+  		mz = #{mz,jdbcType=VARCHAR},  	
+  		sx = #{sx,jdbcType=VARCHAR},  	
+  		yuyan = #{yuyan,jdbcType=VARCHAR},  	
+  		shengao = #{shengao,jdbcType=VARCHAR},  	
+  		tizhong = #{tizhong,jdbcType=VARCHAR},  	
+  		xl = #{xl,jdbcType=VARCHAR},  	
+  		zs = #{zs,jdbcType=VARCHAR},  	
+  		lx = #{lx,jdbcType=VARCHAR},  	
+  		state = #{state,jdbcType=VARCHAR},  	
+  		money = #{money,jdbcType=VARCHAR},  	
+  		sfzh = #{sfzh,jdbcType=VARCHAR},  	
+  		sfzdz = #{sfzdz,jdbcType=VARCHAR},  	
+  		gzlx = #{gzlx,jdbcType=VARCHAR},  	
+  		des = #{des,jdbcType=VARCHAR},  	
+  		techang = #{techang,jdbcType=VARCHAR},  	
+  		xgtd = #{xgtd,jdbcType=VARCHAR},  	
+  		remark = #{remark,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteFws" parameterType="com.bky.model.Fws" flushCache="true">
+  		delete from fws where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="name!=null and name != ''">
+  			or name = #{name}
+  		</if>
+  	  		
+  		<if test="age!=null and age != ''">
+  			or age = #{age}
+  		</if>
+  	  		
+  		<if test="sex!=null and sex != ''">
+  			or sex = #{sex}
+  		</if>
+  	  		
+  		<if test="gjy!=null and gjy != ''">
+  			or gjy = #{gjy}
+  		</if>
+  	  		
+  		<if test="xdz!=null and xdz != ''">
+  			or xdz = #{xdz}
+  		</if>
+  	  		
+  		<if test="phone!=null and phone != ''">
+  			or phone = #{phone}
+  		</if>
+  	  		
+  		<if test="jiguan!=null and jiguan != ''">
+  			or jiguan = #{jiguan}
+  		</if>
+  	  		
+  		<if test="birthday!=null and birthday != ''">
+  			or birthday = #{birthday}
+  		</if>
+  	  		
+  		<if test="mz!=null and mz != ''">
+  			or mz = #{mz}
+  		</if>
+  	  		
+  		<if test="sx!=null and sx != ''">
+  			or sx = #{sx}
+  		</if>
+  	  		
+  		<if test="yuyan!=null and yuyan != ''">
+  			or yuyan = #{yuyan}
+  		</if>
+  	  		
+  		<if test="shengao!=null and shengao != ''">
+  			or shengao = #{shengao}
+  		</if>
+  	  		
+  		<if test="tizhong!=null and tizhong != ''">
+  			or tizhong = #{tizhong}
+  		</if>
+  	  		
+  		<if test="xl!=null and xl != ''">
+  			or xl = #{xl}
+  		</if>
+  	  		
+  		<if test="zs!=null and zs != ''">
+  			or zs = #{zs}
+  		</if>
+  	  		
+  		<if test="lx!=null and lx != ''">
+  			or lx = #{lx}
+  		</if>
+  	  		
+  		<if test="state!=null and state != ''">
+  			or state = #{state}
+  		</if>
+  	  		
+  		<if test="money!=null and money != ''">
+  			or money = #{money}
+  		</if>
+  	  		
+  		<if test="sfzh!=null and sfzh != ''">
+  			or sfzh = #{sfzh}
+  		</if>
+  	  		
+  		<if test="sfzdz!=null and sfzdz != ''">
+  			or sfzdz = #{sfzdz}
+  		</if>
+  	  		
+  		<if test="gzlx!=null and gzlx != ''">
+  			or gzlx = #{gzlx}
+  		</if>
+  	  		
+  		<if test="des!=null and des != ''">
+  			or des = #{des}
+  		</if>
+  	  		
+  		<if test="techang!=null and techang != ''">
+  			or techang = #{techang}
+  		</if>
+  	  		
+  		<if test="xgtd!=null and xgtd != ''">
+  			or xgtd = #{xgtd}
+  		</if>
+  	  		
+  		<if test="remark!=null and remark != ''">
+  			or remark = #{remark}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryFwss" parameterType="com.bky.model.Fws" resultMap="FwsResultMap">
+    	select * from fws where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="name != null and name != ''">  
+    		 and name like '%${ name }%'
+    	</if>
+    	    	    	
+    	<if test="age != null and age != ''">  
+    		 and age like '%${ age }%'
+    	</if>
+    	    	    	
+    	<if test="sex != null and sex != ''">  
+    		 and sex like '%${ sex }%'
+    	</if>
+    	    	    	
+    	<if test="gjy != null and gjy != ''">  
+    		 and gjy like '%${ gjy }%'
+    	</if>
+    	    	    	
+    	<if test="xdz != null and xdz != ''">  
+    		 and xdz like '%${ xdz }%'
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like '%${ phone }%'
+    	</if>
+    	    	    	
+    	<if test="jiguan != null and jiguan != ''">  
+    		 and jiguan like '%${ jiguan }%'
+    	</if>
+    	    	    	
+    	<if test="birthday != null and birthday != ''">  
+    		 and birthday like '%${ birthday }%'
+    	</if>
+    	    	    	
+    	<if test="mz != null and mz != ''">  
+    		 and mz like '%${ mz }%'
+    	</if>
+    	    	    	
+    	<if test="sx != null and sx != ''">  
+    		 and sx like '%${ sx }%'
+    	</if>
+    	    	    	
+    	<if test="yuyan != null and yuyan != ''">  
+    		 and yuyan like '%${ yuyan }%'
+    	</if>
+    	    	    	
+    	<if test="shengao != null and shengao != ''">  
+    		 and shengao like '%${ shengao }%'
+    	</if>
+    	    	    	
+    	<if test="tizhong != null and tizhong != ''">  
+    		 and tizhong like '%${ tizhong }%'
+    	</if>
+    	    	    	
+    	<if test="xl != null and xl != ''">  
+    		 and xl like '%${ xl }%'
+    	</if>
+    	    	    	
+    	<if test="zs != null and zs != ''">  
+    		 and zs like '%${ zs }%'
+    	</if>
+    	    	    	
+    	<if test="lx != null and lx != ''">  
+    		 and lx like '%${ lx }%'
+    	</if>
+    	    	    	
+    	<if test="state != null and state != ''">  
+    		 and state like '%${ state }%'
+    	</if>
+    	    	    	
+    	<if test="money != null and money != ''">  
+    		 and money like '%${ money }%'
+    	</if>
+    	    	    	
+    	<if test="sfzh != null and sfzh != ''">  
+    		 and sfzh like '%${ sfzh }%'
+    	</if>
+    	    	    	
+    	<if test="sfzdz != null and sfzdz != ''">  
+    		 and sfzdz like '%${ sfzdz }%'
+    	</if>
+    	    	    	
+    	<if test="gzlx != null and gzlx != ''">  
+    		 and gzlx like '%${ gzlx }%'
+    	</if>
+    	    	    	
+    	<if test="des != null and des != ''">  
+    		 and des like '%${ des }%'
+    	</if>
+    	    	    	
+    	<if test="techang != null and techang != ''">  
+    		 and techang like '%${ techang }%'
+    	</if>
+    	    	    	
+    	<if test="xgtd != null and xgtd != ''">  
+    		 and xgtd like '%${ xgtd }%'
+    	</if>
+    	    	    	
+    	<if test="remark != null and remark != ''">  
+    		 and remark like '%${ remark }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryFwssByPage" parameterType="com.bky.model.Fws" resultMap="FwsResultMap">
+    	select * from  fws where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="name != null and name != ''">  
+    		 and name like  '%${ name }%' 
+    	</if>
+    	    	    	
+    	<if test="age != null and age != ''">  
+    		 and age like  '%${ age }%' 
+    	</if>
+    	    	    	
+    	<if test="sex != null and sex != ''">  
+    		 and sex like  '%${ sex }%' 
+    	</if>
+    	    	    	
+    	<if test="gjy != null and gjy != ''">  
+    		 and gjy like  '%${ gjy }%' 
+    	</if>
+    	    	    	
+    	<if test="xdz != null and xdz != ''">  
+    		 and xdz like  '%${ xdz }%' 
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like  '%${ phone }%' 
+    	</if>
+    	    	    	
+    	<if test="jiguan != null and jiguan != ''">  
+    		 and jiguan like  '%${ jiguan }%' 
+    	</if>
+    	    	    	
+    	<if test="birthday != null and birthday != ''">  
+    		 and birthday like  '%${ birthday }%' 
+    	</if>
+    	    	    	
+    	<if test="mz != null and mz != ''">  
+    		 and mz like  '%${ mz }%' 
+    	</if>
+    	    	    	
+    	<if test="sx != null and sx != ''">  
+    		 and sx like  '%${ sx }%' 
+    	</if>
+    	    	    	
+    	<if test="yuyan != null and yuyan != ''">  
+    		 and yuyan like  '%${ yuyan }%' 
+    	</if>
+    	    	    	
+    	<if test="shengao != null and shengao != ''">  
+    		 and shengao like  '%${ shengao }%' 
+    	</if>
+    	    	    	
+    	<if test="tizhong != null and tizhong != ''">  
+    		 and tizhong like  '%${ tizhong }%' 
+    	</if>
+    	    	    	
+    	<if test="xl != null and xl != ''">  
+    		 and xl like  '%${ xl }%' 
+    	</if>
+    	    	    	
+    	<if test="zs != null and zs != ''">  
+    		 and zs like  '%${ zs }%' 
+    	</if>
+    	    	    	
+    	<if test="lx != null and lx != ''">  
+    		 and lx like  '%${ lx }%' 
+    	</if>
+    	    	    	
+    	<if test="state != null and state != ''">  
+    		 and state like  '%${ state }%' 
+    	</if>
+    	    	    	
+    	<if test="money != null and money != ''">  
+    		 and money like  '%${ money }%' 
+    	</if>
+    	    	    	
+    	<if test="sfzh != null and sfzh != ''">  
+    		 and sfzh like  '%${ sfzh }%' 
+    	</if>
+    	    	    	
+    	<if test="sfzdz != null and sfzdz != ''">  
+    		 and sfzdz like  '%${ sfzdz }%' 
+    	</if>
+    	    	    	
+    	<if test="gzlx != null and gzlx != ''">  
+    		 and gzlx like  '%${ gzlx }%' 
+    	</if>
+    	    	    	
+    	<if test="des != null and des != ''">  
+    		 and des like  '%${ des }%' 
+    	</if>
+    	    	    	
+    	<if test="techang != null and techang != ''">  
+    		 and techang like  '%${ techang }%' 
+    	</if>
+    	    	    	
+    	<if test="xgtd != null and xgtd != ''">  
+    		 and xgtd like  '%${ xgtd }%' 
+    	</if>
+    	    	    	
+    	<if test="remark != null and remark != ''">  
+    		 and remark like  '%${ remark }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryFwsById" parameterType="HashMap" resultMap="FwsResultMap">
+   	 	select * from fws where  tid = #{fwsId}  
+    </select>
+    
+    <select id="getFwsCount" parameterType="com.bky.model.Fws" resultType="Integer">
+   	 	select count(*) from fws where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="name != null and name != ''">  
+    		 and name like '%${ name }%'
+    	</if>
+    	    	    	
+    	<if test="age != null and age != ''">  
+    		 and age like '%${ age }%'
+    	</if>
+    	    	    	
+    	<if test="sex != null and sex != ''">  
+    		 and sex like '%${ sex }%'
+    	</if>
+    	    	    	
+    	<if test="gjy != null and gjy != ''">  
+    		 and gjy like '%${ gjy }%'
+    	</if>
+    	    	    	
+    	<if test="xdz != null and xdz != ''">  
+    		 and xdz like '%${ xdz }%'
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like '%${ phone }%'
+    	</if>
+    	    	    	
+    	<if test="jiguan != null and jiguan != ''">  
+    		 and jiguan like '%${ jiguan }%'
+    	</if>
+    	    	    	
+    	<if test="birthday != null and birthday != ''">  
+    		 and birthday like '%${ birthday }%'
+    	</if>
+    	    	    	
+    	<if test="mz != null and mz != ''">  
+    		 and mz like '%${ mz }%'
+    	</if>
+    	    	    	
+    	<if test="sx != null and sx != ''">  
+    		 and sx like '%${ sx }%'
+    	</if>
+    	    	    	
+    	<if test="yuyan != null and yuyan != ''">  
+    		 and yuyan like '%${ yuyan }%'
+    	</if>
+    	    	    	
+    	<if test="shengao != null and shengao != ''">  
+    		 and shengao like '%${ shengao }%'
+    	</if>
+    	    	    	
+    	<if test="tizhong != null and tizhong != ''">  
+    		 and tizhong like '%${ tizhong }%'
+    	</if>
+    	    	    	
+    	<if test="xl != null and xl != ''">  
+    		 and xl like '%${ xl }%'
+    	</if>
+    	    	    	
+    	<if test="zs != null and zs != ''">  
+    		 and zs like '%${ zs }%'
+    	</if>
+    	    	    	
+    	<if test="lx != null and lx != ''">  
+    		 and lx like '%${ lx }%'
+    	</if>
+    	    	    	
+    	<if test="state != null and state != ''">  
+    		 and state like '%${ state }%'
+    	</if>
+    	    	    	
+    	<if test="money != null and money != ''">  
+    		 and money like '%${ money }%'
+    	</if>
+    	    	    	
+    	<if test="sfzh != null and sfzh != ''">  
+    		 and sfzh like '%${ sfzh }%'
+    	</if>
+    	    	    	
+    	<if test="sfzdz != null and sfzdz != ''">  
+    		 and sfzdz like '%${ sfzdz }%'
+    	</if>
+    	    	    	
+    	<if test="gzlx != null and gzlx != ''">  
+    		 and gzlx like '%${ gzlx }%'
+    	</if>
+    	    	    	
+    	<if test="des != null and des != ''">  
+    		 and des like '%${ des }%'
+    	</if>
+    	    	    	
+    	<if test="techang != null and techang != ''">  
+    		 and techang like '%${ techang }%'
+    	</if>
+    	    	    	
+    	<if test="xgtd != null and xgtd != ''">  
+    		 and xgtd like '%${ xgtd }%'
+    	</if>
+    	    	    	
+    	<if test="remark != null and remark != ''">  
+    		 and remark like '%${ remark }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

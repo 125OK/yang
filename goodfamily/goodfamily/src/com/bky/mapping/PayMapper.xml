@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.PayMapper">  
+    <resultMap type="com.bky.model.Pay" id="PayResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="kehuId" column="kehu_id" />        
+        <result property="payMoney" column="pay_money" />        
+        <result property="payType" column="pay_type" />        
+        <result property="payCode" column="pay_code" />        
+        <result property="payDate" column="pay_date" />         
+    </resultMap>
+	
+    <insert id="insertPay" parameterType="com.bky.model.Pay"  >
+    	insert into pay
+    	(
+    	
+    		tid,    	
+    		kehu_id,    	
+    		pay_money,    	
+    		pay_type,    	
+    		pay_code,    	
+    		pay_date    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{kehuId,jdbcType=VARCHAR},    	
+			#{payMoney,jdbcType=VARCHAR},    	
+			#{payType,jdbcType=VARCHAR},    	
+			#{payCode,jdbcType=VARCHAR},    	
+			#{payDate,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertPays" parameterType="ArrayList" flushCache="true">
+    	insert into pay
+    	(
+    		
+    		tid,    		
+    		kehu_id,    		
+    		pay_money,    		
+    		pay_type,    		
+    		pay_code,    		
+    		pay_date    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.kehuId,jdbcType=VARCHAR},    		
+			#{item.payMoney,jdbcType=VARCHAR},    		
+			#{item.payType,jdbcType=VARCHAR},    		
+			#{item.payCode,jdbcType=VARCHAR},    		
+			#{item.payDate,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updatePay" parameterType="com.bky.model.Pay" flushCache="true">
+  		update pay
+  	set 
+  	
+  		   	
+  		kehu_id = #{kehuId,jdbcType=VARCHAR},  	
+  		pay_money = #{payMoney,jdbcType=VARCHAR},  	
+  		pay_type = #{payType,jdbcType=VARCHAR},  	
+  		pay_code = #{payCode,jdbcType=VARCHAR},  	
+  		pay_date = #{payDate,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deletePay" parameterType="com.bky.model.Pay" flushCache="true">
+  		delete from pay where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="kehuId!=null and kehuId != ''">
+  			or kehu_id = #{kehuId}
+  		</if>
+  	  		
+  		<if test="payMoney!=null and payMoney != ''">
+  			or pay_money = #{payMoney}
+  		</if>
+  	  		
+  		<if test="payType!=null and payType != ''">
+  			or pay_type = #{payType}
+  		</if>
+  	  		
+  		<if test="payCode!=null and payCode != ''">
+  			or pay_code = #{payCode}
+  		</if>
+  	  		
+  		<if test="payDate!=null and payDate != ''">
+  			or pay_date = #{payDate}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryPays" parameterType="com.bky.model.Pay" resultMap="PayResultMap">
+    	select * from pay where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like '%${ kehuId }%'
+    	</if>
+    	    	    	
+    	<if test="payMoney != null and payMoney != ''">  
+    		 and pay_money like '%${ payMoney }%'
+    	</if>
+    	    	    	
+    	<if test="payType != null and payType != ''">  
+    		 and pay_type like '%${ payType }%'
+    	</if>
+    	    	    	
+    	<if test="payCode != null and payCode != ''">  
+    		 and pay_code like '%${ payCode }%'
+    	</if>
+    	    	    	
+    	<if test="payDate != null and payDate != ''">  
+    		 and pay_date like '%${ payDate }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryPaysByPage" parameterType="com.bky.model.Pay" resultMap="PayResultMap">
+    	select * from  pay where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like  '%${ kehuId }%' 
+    	</if>
+    	    	    	
+    	<if test="payMoney != null and payMoney != ''">  
+    		 and pay_money like  '%${ payMoney }%' 
+    	</if>
+    	    	    	
+    	<if test="payType != null and payType != ''">  
+    		 and pay_type like  '%${ payType }%' 
+    	</if>
+    	    	    	
+    	<if test="payCode != null and payCode != ''">  
+    		 and pay_code like  '%${ payCode }%' 
+    	</if>
+    	    	    	
+    	<if test="payDate != null and payDate != ''">  
+    		 and pay_date like  '%${ payDate }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryPayById" parameterType="HashMap" resultMap="PayResultMap">
+   	 	select * from pay where  tid = #{payId}  
+    </select>
+    
+    <select id="getPayCount" parameterType="com.bky.model.Pay" resultType="Integer">
+   	 	select count(*) from pay where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like '%${ kehuId }%'
+    	</if>
+    	    	    	
+    	<if test="payMoney != null and payMoney != ''">  
+    		 and pay_money like '%${ payMoney }%'
+    	</if>
+    	    	    	
+    	<if test="payType != null and payType != ''">  
+    		 and pay_type like '%${ payType }%'
+    	</if>
+    	    	    	
+    	<if test="payCode != null and payCode != ''">  
+    		 and pay_code like '%${ payCode }%'
+    	</if>
+    	    	    	
+    	<if test="payDate != null and payDate != ''">  
+    		 and pay_date like '%${ payDate }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

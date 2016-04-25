@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.FwsjtMapper">  
+    <resultMap type="com.bky.model.Fwsjt" id="FwsjtResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="fwsId" column="fws_id" />        
+        <result property="jtcy" column="jtcy" />        
+        <result property="phone" column="phone" />        
+        <result property="zn" column="zn" />        
+        <result property="ywlr" column="ywlr" />        
+        <result property="qita" column="qita" />        
+        <result property="rsb" column="rsb" />        
+        <result property="remark" column="remark" />         
+    </resultMap>
+	
+    <insert id="insertFwsjt" parameterType="com.bky.model.Fwsjt"  >
+    	insert into fwsjt
+    	(
+    	
+    		tid,    	
+    		fws_id,    	
+    		jtcy,    	
+    		phone,    	
+    		zn,    	
+    		ywlr,    	
+    		qita,    	
+    		rsb,    	
+    		remark    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{fwsId,jdbcType=VARCHAR},    	
+			#{jtcy,jdbcType=VARCHAR},    	
+			#{phone,jdbcType=VARCHAR},    	
+			#{zn,jdbcType=VARCHAR},    	
+			#{ywlr,jdbcType=VARCHAR},    	
+			#{qita,jdbcType=VARCHAR},    	
+			#{rsb,jdbcType=VARCHAR},    	
+			#{remark,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertFwsjts" parameterType="ArrayList" flushCache="true">
+    	insert into fwsjt
+    	(
+    		
+    		tid,    		
+    		fws_id,    		
+    		jtcy,    		
+    		phone,    		
+    		zn,    		
+    		ywlr,    		
+    		qita,    		
+    		rsb,    		
+    		remark    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.fwsId,jdbcType=VARCHAR},    		
+			#{item.jtcy,jdbcType=VARCHAR},    		
+			#{item.phone,jdbcType=VARCHAR},    		
+			#{item.zn,jdbcType=VARCHAR},    		
+			#{item.ywlr,jdbcType=VARCHAR},    		
+			#{item.qita,jdbcType=VARCHAR},    		
+			#{item.rsb,jdbcType=VARCHAR},    		
+			#{item.remark,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateFwsjt" parameterType="com.bky.model.Fwsjt" flushCache="true">
+  		update fwsjt
+  	set 
+  	
+  		   	
+  		fws_id = #{fwsId,jdbcType=VARCHAR},  	
+  		jtcy = #{jtcy,jdbcType=VARCHAR},  	
+  		phone = #{phone,jdbcType=VARCHAR},  	
+  		zn = #{zn,jdbcType=VARCHAR},  	
+  		ywlr = #{ywlr,jdbcType=VARCHAR},  	
+  		qita = #{qita,jdbcType=VARCHAR},  	
+  		rsb = #{rsb,jdbcType=VARCHAR},  	
+  		remark = #{remark,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteFwsjt" parameterType="com.bky.model.Fwsjt" flushCache="true">
+  		delete from fwsjt where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="fwsId!=null and fwsId != ''">
+  			or fws_id = #{fwsId}
+  		</if>
+  	  		
+  		<if test="jtcy!=null and jtcy != ''">
+  			or jtcy = #{jtcy}
+  		</if>
+  	  		
+  		<if test="phone!=null and phone != ''">
+  			or phone = #{phone}
+  		</if>
+  	  		
+  		<if test="zn!=null and zn != ''">
+  			or zn = #{zn}
+  		</if>
+  	  		
+  		<if test="ywlr!=null and ywlr != ''">
+  			or ywlr = #{ywlr}
+  		</if>
+  	  		
+  		<if test="qita!=null and qita != ''">
+  			or qita = #{qita}
+  		</if>
+  	  		
+  		<if test="rsb!=null and rsb != ''">
+  			or rsb = #{rsb}
+  		</if>
+  	  		
+  		<if test="remark!=null and remark != ''">
+  			or remark = #{remark}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryFwsjts" parameterType="com.bky.model.Fwsjt" resultMap="FwsjtResultMap">
+    	select * from fwsjt where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like '%${ fwsId }%'
+    	</if>
+    	    	    	
+    	<if test="jtcy != null and jtcy != ''">  
+    		 and jtcy like '%${ jtcy }%'
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like '%${ phone }%'
+    	</if>
+    	    	    	
+    	<if test="zn != null and zn != ''">  
+    		 and zn like '%${ zn }%'
+    	</if>
+    	    	    	
+    	<if test="ywlr != null and ywlr != ''">  
+    		 and ywlr like '%${ ywlr }%'
+    	</if>
+    	    	    	
+    	<if test="qita != null and qita != ''">  
+    		 and qita like '%${ qita }%'
+    	</if>
+    	    	    	
+    	<if test="rsb != null and rsb != ''">  
+    		 and rsb like '%${ rsb }%'
+    	</if>
+    	    	    	
+    	<if test="remark != null and remark != ''">  
+    		 and remark like '%${ remark }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryFwsjtsByPage" parameterType="com.bky.model.Fwsjt" resultMap="FwsjtResultMap">
+    	select * from  fwsjt where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like  '%${ fwsId }%' 
+    	</if>
+    	    	    	
+    	<if test="jtcy != null and jtcy != ''">  
+    		 and jtcy like  '%${ jtcy }%' 
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like  '%${ phone }%' 
+    	</if>
+    	    	    	
+    	<if test="zn != null and zn != ''">  
+    		 and zn like  '%${ zn }%' 
+    	</if>
+    	    	    	
+    	<if test="ywlr != null and ywlr != ''">  
+    		 and ywlr like  '%${ ywlr }%' 
+    	</if>
+    	    	    	
+    	<if test="qita != null and qita != ''">  
+    		 and qita like  '%${ qita }%' 
+    	</if>
+    	    	    	
+    	<if test="rsb != null and rsb != ''">  
+    		 and rsb like  '%${ rsb }%' 
+    	</if>
+    	    	    	
+    	<if test="remark != null and remark != ''">  
+    		 and remark like  '%${ remark }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryFwsjtById" parameterType="HashMap" resultMap="FwsjtResultMap">
+   	 	select * from fwsjt where  tid = #{fwsjtId}  
+    </select>
+    
+    <select id="getFwsjtCount" parameterType="com.bky.model.Fwsjt" resultType="Integer">
+   	 	select count(*) from fwsjt where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like '%${ fwsId }%'
+    	</if>
+    	    	    	
+    	<if test="jtcy != null and jtcy != ''">  
+    		 and jtcy like '%${ jtcy }%'
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like '%${ phone }%'
+    	</if>
+    	    	    	
+    	<if test="zn != null and zn != ''">  
+    		 and zn like '%${ zn }%'
+    	</if>
+    	    	    	
+    	<if test="ywlr != null and ywlr != ''">  
+    		 and ywlr like '%${ ywlr }%'
+    	</if>
+    	    	    	
+    	<if test="qita != null and qita != ''">  
+    		 and qita like '%${ qita }%'
+    	</if>
+    	    	    	
+    	<if test="rsb != null and rsb != ''">  
+    		 and rsb like '%${ rsb }%'
+    	</if>
+    	    	    	
+    	<if test="remark != null and remark != ''">  
+    		 and remark like '%${ remark }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

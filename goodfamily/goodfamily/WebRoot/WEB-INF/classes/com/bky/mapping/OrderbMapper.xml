@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.OrderbMapper">  
+    <resultMap type="com.bky.model.Orderb" id="OrderbResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="ordersId" column="orders_id" />        
+        <result property="orderSjId" column="order_sj_id" />        
+        <result property="orderinfoId" column="orderInfo_id" />         
+    </resultMap>
+	
+    <insert id="insertOrderb" parameterType="com.bky.model.Orderb"  >
+    	insert into orderb
+    	(
+    	
+    		tid,    	
+    		orders_id,    	
+    		order_sj_id,    	
+    		orderInfo_id    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{ordersId,jdbcType=VARCHAR},    	
+			#{orderSjId,jdbcType=VARCHAR},    	
+			#{orderinfoId,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertOrderbs" parameterType="ArrayList" flushCache="true">
+    	insert into orderb
+    	(
+    		
+    		tid,    		
+    		orders_id,    		
+    		order_sj_id,    		
+    		orderInfo_id    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.ordersId,jdbcType=VARCHAR},    		
+			#{item.orderSjId,jdbcType=VARCHAR},    		
+			#{item.orderinfoId,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateOrderb" parameterType="com.bky.model.Orderb" flushCache="true">
+  		update orderb
+  	set 
+  	
+  		   	
+  		orders_id = #{ordersId,jdbcType=VARCHAR},  	
+  		order_sj_id = #{orderSjId,jdbcType=VARCHAR},  	
+  		orderInfo_id = #{orderinfoId,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteOrderb" parameterType="com.bky.model.Orderb" flushCache="true">
+  		delete from orderb where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="ordersId!=null and ordersId != ''">
+  			or orders_id = #{ordersId}
+  		</if>
+  	  		
+  		<if test="orderSjId!=null and orderSjId != ''">
+  			or order_sj_id = #{orderSjId}
+  		</if>
+  	  		
+  		<if test="orderinfoId!=null and orderinfoId != ''">
+  			or orderInfo_id = #{orderinfoId}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryOrderbs" parameterType="com.bky.model.Orderb" resultMap="OrderbResultMap">
+    	select * from orderb where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="ordersId != null and ordersId != ''">  
+    		 and orders_id like '%${ ordersId }%'
+    	</if>
+    	    	    	
+    	<if test="orderSjId != null and orderSjId != ''">  
+    		 and order_sj_id like '%${ orderSjId }%'
+    	</if>
+    	    	    	
+    	<if test="orderinfoId != null and orderinfoId != ''">  
+    		 and orderInfo_id like '%${ orderinfoId }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryOrderbsByPage" parameterType="com.bky.model.Orderb" resultMap="OrderbResultMap">
+    	select * from  orderb where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="ordersId != null and ordersId != ''">  
+    		 and orders_id like  '%${ ordersId }%' 
+    	</if>
+    	    	    	
+    	<if test="orderSjId != null and orderSjId != ''">  
+    		 and order_sj_id like  '%${ orderSjId }%' 
+    	</if>
+    	    	    	
+    	<if test="orderinfoId != null and orderinfoId != ''">  
+    		 and orderInfo_id like  '%${ orderinfoId }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryOrderbById" parameterType="HashMap" resultMap="OrderbResultMap">
+   	 	select * from orderb where  tid = #{orderbId}  
+    </select>
+    
+    <select id="getOrderbCount" parameterType="com.bky.model.Orderb" resultType="Integer">
+   	 	select count(*) from orderb where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="ordersId != null and ordersId != ''">  
+    		 and orders_id like '%${ ordersId }%'
+    	</if>
+    	    	    	
+    	<if test="orderSjId != null and orderSjId != ''">  
+    		 and order_sj_id like '%${ orderSjId }%'
+    	</if>
+    	    	    	
+    	<if test="orderinfoId != null and orderinfoId != ''">  
+    		 and orderInfo_id like '%${ orderinfoId }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.RefundMapper">  
+    <resultMap type="com.bky.model.Refund" id="RefundResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="kehuId" column="kehu_id" />        
+        <result property="refundMoney" column="refund_money" />        
+        <result property="refundType" column="refund_type" />        
+        <result property="refundCode" column="refund_code" />        
+        <result property="refundDate" column="refund_date" />         
+    </resultMap>
+	
+    <insert id="insertRefund" parameterType="com.bky.model.Refund"  >
+    	insert into refund
+    	(
+    	
+    		tid,    	
+    		kehu_id,    	
+    		refund_money,    	
+    		refund_type,    	
+    		refund_code,    	
+    		refund_date    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{kehuId,jdbcType=VARCHAR},    	
+			#{refundMoney,jdbcType=VARCHAR},    	
+			#{refundType,jdbcType=VARCHAR},    	
+			#{refundCode,jdbcType=VARCHAR},    	
+			#{refundDate,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertRefunds" parameterType="ArrayList" flushCache="true">
+    	insert into refund
+    	(
+    		
+    		tid,    		
+    		kehu_id,    		
+    		refund_money,    		
+    		refund_type,    		
+    		refund_code,    		
+    		refund_date    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.kehuId,jdbcType=VARCHAR},    		
+			#{item.refundMoney,jdbcType=VARCHAR},    		
+			#{item.refundType,jdbcType=VARCHAR},    		
+			#{item.refundCode,jdbcType=VARCHAR},    		
+			#{item.refundDate,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateRefund" parameterType="com.bky.model.Refund" flushCache="true">
+  		update refund
+  	set 
+  	
+  		   	
+  		kehu_id = #{kehuId,jdbcType=VARCHAR},  	
+  		refund_money = #{refundMoney,jdbcType=VARCHAR},  	
+  		refund_type = #{refundType,jdbcType=VARCHAR},  	
+  		refund_code = #{refundCode,jdbcType=VARCHAR},  	
+  		refund_date = #{refundDate,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteRefund" parameterType="com.bky.model.Refund" flushCache="true">
+  		delete from refund where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="kehuId!=null and kehuId != ''">
+  			or kehu_id = #{kehuId}
+  		</if>
+  	  		
+  		<if test="refundMoney!=null and refundMoney != ''">
+  			or refund_money = #{refundMoney}
+  		</if>
+  	  		
+  		<if test="refundType!=null and refundType != ''">
+  			or refund_type = #{refundType}
+  		</if>
+  	  		
+  		<if test="refundCode!=null and refundCode != ''">
+  			or refund_code = #{refundCode}
+  		</if>
+  	  		
+  		<if test="refundDate!=null and refundDate != ''">
+  			or refund_date = #{refundDate}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryRefunds" parameterType="com.bky.model.Refund" resultMap="RefundResultMap">
+    	select * from refund where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like '%${ kehuId }%'
+    	</if>
+    	    	    	
+    	<if test="refundMoney != null and refundMoney != ''">  
+    		 and refund_money like '%${ refundMoney }%'
+    	</if>
+    	    	    	
+    	<if test="refundType != null and refundType != ''">  
+    		 and refund_type like '%${ refundType }%'
+    	</if>
+    	    	    	
+    	<if test="refundCode != null and refundCode != ''">  
+    		 and refund_code like '%${ refundCode }%'
+    	</if>
+    	    	    	
+    	<if test="refundDate != null and refundDate != ''">  
+    		 and refund_date like '%${ refundDate }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryRefundsByPage" parameterType="com.bky.model.Refund" resultMap="RefundResultMap">
+    	select * from  refund where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like  '%${ kehuId }%' 
+    	</if>
+    	    	    	
+    	<if test="refundMoney != null and refundMoney != ''">  
+    		 and refund_money like  '%${ refundMoney }%' 
+    	</if>
+    	    	    	
+    	<if test="refundType != null and refundType != ''">  
+    		 and refund_type like  '%${ refundType }%' 
+    	</if>
+    	    	    	
+    	<if test="refundCode != null and refundCode != ''">  
+    		 and refund_code like  '%${ refundCode }%' 
+    	</if>
+    	    	    	
+    	<if test="refundDate != null and refundDate != ''">  
+    		 and refund_date like  '%${ refundDate }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryRefundById" parameterType="HashMap" resultMap="RefundResultMap">
+   	 	select * from refund where  tid = #{refundId}  
+    </select>
+    
+    <select id="getRefundCount" parameterType="com.bky.model.Refund" resultType="Integer">
+   	 	select count(*) from refund where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like '%${ kehuId }%'
+    	</if>
+    	    	    	
+    	<if test="refundMoney != null and refundMoney != ''">  
+    		 and refund_money like '%${ refundMoney }%'
+    	</if>
+    	    	    	
+    	<if test="refundType != null and refundType != ''">  
+    		 and refund_type like '%${ refundType }%'
+    	</if>
+    	    	    	
+    	<if test="refundCode != null and refundCode != ''">  
+    		 and refund_code like '%${ refundCode }%'
+    	</if>
+    	    	    	
+    	<if test="refundDate != null and refundDate != ''">  
+    		 and refund_date like '%${ refundDate }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.LoginMapper">  
+    <resultMap type="com.bky.model.Login" id="LoginResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="code" column="code" />        
+        <result property="name" column="name" />        
+        <result property="pwd" column="pwd" />        
+        <result property="qx" column="qx" />         
+    </resultMap>
+	
+    <insert id="insertLogin" parameterType="com.bky.model.Login"  >
+    	insert into login
+    	(
+    	
+    		tid,    	
+    		code,    	
+    		name,    	
+    		pwd,    	
+    		qx    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{code,jdbcType=VARCHAR},    	
+			#{name,jdbcType=VARCHAR},    	
+			#{pwd,jdbcType=VARCHAR},    	
+			#{qx,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertLogins" parameterType="ArrayList" flushCache="true">
+    	insert into login
+    	(
+    		
+    		tid,    		
+    		code,    		
+    		name,    		
+    		pwd,    		
+    		qx    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.code,jdbcType=VARCHAR},    		
+			#{item.name,jdbcType=VARCHAR},    		
+			#{item.pwd,jdbcType=VARCHAR},    		
+			#{item.qx,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateLogin" parameterType="com.bky.model.Login" flushCache="true">
+  		update login
+  	set 
+  	
+  		   	
+  		code = #{code,jdbcType=VARCHAR},  	
+  		name = #{name,jdbcType=VARCHAR},  	
+  		pwd = #{pwd,jdbcType=VARCHAR},  	
+  		qx = #{qx,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteLogin" parameterType="com.bky.model.Login" flushCache="true">
+  		delete from login where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="code!=null and code != ''">
+  			or code = #{code}
+  		</if>
+  	  		
+  		<if test="name!=null and name != ''">
+  			or name = #{name}
+  		</if>
+  	  		
+  		<if test="pwd!=null and pwd != ''">
+  			or pwd = #{pwd}
+  		</if>
+  	  		
+  		<if test="qx!=null and qx != ''">
+  			or qx = #{qx}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryLogins" parameterType="com.bky.model.Login" resultMap="LoginResultMap">
+    	select * from login where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="code != null and code != ''">  
+    		 and code like '%${ code }%'
+    	</if>
+    	    	    	
+    	<if test="name != null and name != ''">  
+    		 and name like '%${ name }%'
+    	</if>
+    	    	    	
+    	<if test="pwd != null and pwd != ''">  
+    		 or pwd like '%${ pwd }%'
+    	</if>
+    	    	    	
+    	<if test="qx != null and qx != ''">  
+    		 and qx like '%${ qx }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryLoginsByPage" parameterType="com.bky.model.Login" resultMap="LoginResultMap">
+    	select * from  login where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="code != null and code != ''">  
+    		 and code like  '%${ code }%' 
+    	</if>
+    	    	    	
+    	<if test="name != null and name != ''">  
+    		 or name like  '%${ name }%' 
+    	</if>
+    	    	    	
+    	<if test="pwd != null and pwd != ''">  
+    		 and pwd like  '%${ pwd }%' 
+    	</if>
+    	    	    	
+    	and tid in (select tid from login where qx='${qx}')
+    	   and tid limit ${page},${rows} 			
+ 
+    </select>
+    
+    <select id="queryLoginById" parameterType="HashMap" resultMap="LoginResultMap">
+   	 	select * from login where  tid = #{loginId}  
+    </select>
+    
+    <select id="getLoginCount" parameterType="com.bky.model.Login" resultType="Integer">
+   	 	select count(*) from login where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="code != null and code != ''">  
+    		 and code like '%${ code }%'
+    	</if>
+    	    	    	
+    	<if test="name != null and name != ''">  
+    		 or name = '${ name }'
+    	</if>
+    	    	    	
+    	<if test="pwd != null and pwd != ''">  
+    		 and pwd = '${ pwd }'
+    	</if>
+    	    	    	
+    	
+    	and tid in (select tid from login where qx='${qx}')
+    	    	    </select>
+    
+    
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.OrderSjMapper">  
+    <resultMap type="com.bky.model.OrderSj" id="OrderSjResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="orderbId" column="orderb_id" />        
+        <result property="zhouId" column="zhou_id" />        
+        <result property="timebId" column="timeb_id" />         
+    </resultMap>
+	
+    <insert id="insertOrderSj" parameterType="com.bky.model.OrderSj"  >
+    	insert into order_sj
+    	(
+    	
+    		tid,    	
+    		orderb_id,    	
+    		zhou_id,    	
+    		timeb_id    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{orderbId,jdbcType=VARCHAR},    	
+			#{zhouId,jdbcType=VARCHAR},    	
+			#{timebId,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertOrderSjs" parameterType="ArrayList" flushCache="true">
+    	insert into order_sj
+    	(
+    		
+    		tid,    		
+    		orderb_id,    		
+    		zhou_id,    		
+    		timeb_id    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.orderbId,jdbcType=VARCHAR},    		
+			#{item.zhouId,jdbcType=VARCHAR},    		
+			#{item.timebId,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateOrderSj" parameterType="com.bky.model.OrderSj" flushCache="true">
+  		update order_sj
+  	set 
+  	
+  		   	
+  		orderb_id = #{orderbId,jdbcType=VARCHAR},  	
+  		zhou_id = #{zhouId,jdbcType=VARCHAR},  	
+  		timeb_id = #{timebId,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteOrderSj" parameterType="com.bky.model.OrderSj" flushCache="true">
+  		delete from order_sj where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="orderbId!=null and orderbId != ''">
+  			or orderb_id = #{orderbId}
+  		</if>
+  	  		
+  		<if test="zhouId!=null and zhouId != ''">
+  			or zhou_id = #{zhouId}
+  		</if>
+  	  		
+  		<if test="timebId!=null and timebId != ''">
+  			or timeb_id = #{timebId}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryOrderSjs" parameterType="com.bky.model.OrderSj" resultMap="OrderSjResultMap">
+    	select * from order_sj where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="orderbId != null and orderbId != ''">  
+    		 and orderb_id like '%${ orderbId }%'
+    	</if>
+    	    	    	
+    	<if test="zhouId != null and zhouId != ''">  
+    		 and zhou_id like '%${ zhouId }%'
+    	</if>
+    	    	    	
+    	<if test="timebId != null and timebId != ''">  
+    		 and timeb_id like '%${ timebId }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryOrderSjsByPage" parameterType="com.bky.model.OrderSj" resultMap="OrderSjResultMap">
+    	select * from  order_sj where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="orderbId != null and orderbId != ''">  
+    		 and orderb_id like  '%${ orderbId }%' 
+    	</if>
+    	    	    	
+    	<if test="zhouId != null and zhouId != ''">  
+    		 and zhou_id like  '%${ zhouId }%' 
+    	</if>
+    	    	    	
+    	<if test="timebId != null and timebId != ''">  
+    		 and timeb_id like  '%${ timebId }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryOrderSjById" parameterType="HashMap" resultMap="OrderSjResultMap">
+   	 	select * from order_sj where  tid = #{orderSjId}  
+    </select>
+    
+    <select id="getOrderSjCount" parameterType="com.bky.model.OrderSj" resultType="Integer">
+   	 	select count(*) from order_sj where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="orderbId != null and orderbId != ''">  
+    		 and orderb_id like '%${ orderbId }%'
+    	</if>
+    	    	    	
+    	<if test="zhouId != null and zhouId != ''">  
+    		 and zhou_id like '%${ zhouId }%'
+    	</if>
+    	    	    	
+    	<if test="timebId != null and timebId != ''">  
+    		 and timeb_id like '%${ timebId }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

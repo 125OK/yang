@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.mapper.MpcenterMapper">  
+    <resultMap type="com.bky.model.Mpcenter" id="MpcenterResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="mname" column="mname" />        
+        <result property="maddress" column="maddress" />        
+        <result property="mdj" column="mdj" />        
+        <result property="fwsdj" column="fwsdj" />        
+        <result property="pname" column="pname" />        
+        <result property="paddress" column="paddress" />        
+        <result property="quyu" column="quyu" />        
+        <result property="phone" column="phone" />        
+        <result property="pid" column="pid" />         
+    </resultMap>
+	
+    <insert id="insertMpcenter" parameterType="com.bky.model.Mpcenter"  >
+    	insert into mpcenter
+    	(
+    	
+    		tid,    	
+    		mname,    	
+    		maddress,    	
+    		mdj,    	
+    		fwsdj,    	
+    		pname,    	
+    		paddress,    	
+    		quyu,    	
+    		phone,    	
+    		pid    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{mname,jdbcType=VARCHAR},    	
+			#{maddress,jdbcType=VARCHAR},    	
+			#{mdj,jdbcType=VARCHAR},    	
+			#{fwsdj,jdbcType=VARCHAR},    	
+			#{pname,jdbcType=VARCHAR},    	
+			#{paddress,jdbcType=VARCHAR},    	
+			#{quyu,jdbcType=VARCHAR},    	
+			#{phone,jdbcType=VARCHAR},    	
+			#{pid,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertMpcenters" parameterType="ArrayList" flushCache="true">
+    	insert into mpcenter
+    	(
+    		
+    		tid,    		
+    		mname,    		
+    		maddress,    		
+    		mdj,    		
+    		fwsdj,    		
+    		pname,    		
+    		paddress,    		
+    		quyu,    		
+    		phone,    		
+    		pid    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.mname,jdbcType=VARCHAR},    		
+			#{item.maddress,jdbcType=VARCHAR},    		
+			#{item.mdj,jdbcType=VARCHAR},    		
+			#{item.fwsdj,jdbcType=VARCHAR},    		
+			#{item.pname,jdbcType=VARCHAR},    		
+			#{item.paddress,jdbcType=VARCHAR},    		
+			#{item.quyu,jdbcType=VARCHAR},    		
+			#{item.phone,jdbcType=VARCHAR},    		
+			#{item.pid,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateMpcenter" parameterType="com.bky.model.Mpcenter" flushCache="true">
+  		update mpcenter
+  	set 
+  	
+  		   	
+  		mname = #{mname,jdbcType=VARCHAR},  	
+  		maddress = #{maddress,jdbcType=VARCHAR},  	
+  		mdj = #{mdj,jdbcType=VARCHAR},  	
+  		fwsdj = #{fwsdj,jdbcType=VARCHAR},  	
+  		pname = #{pname,jdbcType=VARCHAR},  	
+  		paddress = #{paddress,jdbcType=VARCHAR},  	
+  		quyu = #{quyu,jdbcType=VARCHAR},  	
+  		phone = #{phone,jdbcType=VARCHAR},  	
+  		pid = #{pid,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteMpcenter" parameterType="com.bky.model.Mpcenter" flushCache="true">
+  		delete from mpcenter where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="mname!=null and mname != ''">
+  			or mname = #{mname}
+  		</if>
+  	  		
+  		<if test="maddress!=null and maddress != ''">
+  			or maddress = #{maddress}
+  		</if>
+  	  		
+  		<if test="mdj!=null and mdj != ''">
+  			or mdj = #{mdj}
+  		</if>
+  	  		
+  		<if test="fwsdj!=null and fwsdj != ''">
+  			or fwsdj = #{fwsdj}
+  		</if>
+  	  		
+  		<if test="pname!=null and pname != ''">
+  			or pname = #{pname}
+  		</if>
+  	  		
+  		<if test="paddress!=null and paddress != ''">
+  			or paddress = #{paddress}
+  		</if>
+  	  		
+  		<if test="quyu!=null and quyu != ''">
+  			or quyu = #{quyu}
+  		</if>
+  	  		
+  		<if test="phone!=null and phone != ''">
+  			or phone = #{phone}
+  		</if>
+  	  		
+  		<if test="pid!=null and pid != ''">
+  			or pid = #{pid}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryMpcenters" parameterType="com.bky.model.Mpcenter" resultMap="MpcenterResultMap">
+    	select * from mpcenter where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="mname != null and mname != ''">  
+    		 and mname like '%${ mname }%'
+    	</if>
+    	    	    	
+    	<if test="maddress != null and maddress != ''">  
+    		 and maddress like '%${ maddress }%'
+    	</if>
+    	    	    	
+    	<if test="mdj != null and mdj != ''">  
+    		 and mdj like '%${ mdj }%'
+    	</if>
+    	    	    	
+    	<if test="fwsdj != null and fwsdj != ''">  
+    		 and fwsdj like '%${ fwsdj }%'
+    	</if>
+    	    	    	
+    	<if test="pname != null and pname != ''">  
+    		 and pname like '%${ pname }%'
+    	</if>
+    	    	    	
+    	<if test="paddress != null and paddress != ''">  
+    		 and paddress like '%${ paddress }%'
+    	</if>
+    	    	    	
+    	<if test="quyu != null and quyu != ''">  
+    		 and quyu like '%${ quyu }%'
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like '%${ phone }%'
+    	</if>
+    	    	    	
+    	<if test="pid != null and pid != ''">  
+    		 and pid like '%${ pid }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryMpcentersByPage" parameterType="com.bky.model.Mpcenter" resultMap="MpcenterResultMap">
+    	select * from  mpcenter where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="mname != null and mname != ''">  
+    		 and mname like  '%${ mname }%' 
+    	</if>
+    	    	    	
+    	<if test="maddress != null and maddress != ''">  
+    		 and maddress like  '%${ maddress }%' 
+    	</if>
+    	    	    	
+    	<if test="mdj != null and mdj != ''">  
+    		 and mdj like  '%${ mdj }%' 
+    	</if>
+    	    	    	
+    	<if test="fwsdj != null and fwsdj != ''">  
+    		 and fwsdj like  '%${ fwsdj }%' 
+    	</if>
+    	    	    	
+    	<if test="pname != null and pname != ''">  
+    		 and pname like  '%${ pname }%' 
+    	</if>
+    	    	    	
+    	<if test="paddress != null and paddress != ''">  
+    		 and paddress like  '%${ paddress }%' 
+    	</if>
+    	    	    	
+    	<if test="quyu != null and quyu != ''">  
+    		 and quyu like  '%${ quyu }%' 
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like  '%${ phone }%' 
+    	</if>
+    	    	    	
+    	<if test="pid != null and pid != ''">  
+    		 and pid like  '%${ pid }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryMpcenterById" parameterType="HashMap" resultMap="MpcenterResultMap">
+   	 	select * from mpcenter where  tid = #{mpcenterId}  
+    </select>
+    
+    <select id="getMpcenterCount" parameterType="com.bky.model.Mpcenter" resultType="Integer">
+   	 	select count(*) from mpcenter where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="mname != null and mname != ''">  
+    		 and mname like '%${ mname }%'
+    	</if>
+    	    	    	
+    	<if test="maddress != null and maddress != ''">  
+    		 and maddress like '%${ maddress }%'
+    	</if>
+    	    	    	
+    	<if test="mdj != null and mdj != ''">  
+    		 and mdj like '%${ mdj }%'
+    	</if>
+    	    	    	
+    	<if test="fwsdj != null and fwsdj != ''">  
+    		 and fwsdj like '%${ fwsdj }%'
+    	</if>
+    	    	    	
+    	<if test="pname != null and pname != ''">  
+    		 and pname like '%${ pname }%'
+    	</if>
+    	    	    	
+    	<if test="paddress != null and paddress != ''">  
+    		 and paddress like '%${ paddress }%'
+    	</if>
+    	    	    	
+    	<if test="quyu != null and quyu != ''">  
+    		 and quyu like '%${ quyu }%'
+    	</if>
+    	    	    	
+    	<if test="phone != null and phone != ''">  
+    		 and phone like '%${ phone }%'
+    	</if>
+    	    	    	
+    	<if test="pid != null and pid != ''">  
+    		 and pid like '%${ pid }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>

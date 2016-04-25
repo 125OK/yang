@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <!--这块等于dao接口的实现  namespace必须和接口的类路径一样-->  
+<mapper namespace="com.bky.dao.OrdersMapper">  
+    <resultMap type="com.bky.model.Orders" id="OrdersResultMap">  
+    	
+        <id property="tid" column="tid" />        
+        <result property="type" column="type" />        
+        <result property="state" column="state" />        
+        <result property="fwsId" column="fws_id" />        
+        <result property="kehuId" column="kehu_id" />        
+        <result property="mpcenterId" column="mpcenter_id" />        
+        <result property="ksdate" column="ksdate" />        
+        <result property="jsdate" column="jsdate" />        
+        <result property="zj" column="zj" />        
+        <result property="zsj" column="zsj" />         
+    </resultMap>
+	
+    <insert id="insertOrders" parameterType="com.bky.model.Orders"  >
+    	insert into orders
+    	(
+    	
+    		tid,    	
+    		type,    	
+    		state,    	
+    		fws_id,    	
+    		kehu_id,    	
+    		mpcenter_id,    	
+    		ksdate,    	
+    		jsdate,    	
+    		zj,    	
+    		zsj    	
+    	)
+    	values
+    	(
+    	
+			default,    	
+			#{type,jdbcType=VARCHAR},    	
+			#{state,jdbcType=VARCHAR},    	
+			#{fwsId,jdbcType=VARCHAR},    	
+			#{kehuId,jdbcType=VARCHAR},    	
+			#{mpcenterId,jdbcType=VARCHAR},    	
+			#{ksdate,jdbcType=VARCHAR},    	
+			#{jsdate,jdbcType=VARCHAR},    	
+			#{zj,jdbcType=VARCHAR},    	
+			#{zsj,jdbcType=VARCHAR}    	
+    	)
+    </insert>
+    
+    <insert id="insertOrderss" parameterType="ArrayList" flushCache="true">
+    	insert into orders
+    	(
+    		
+    		tid,    		
+    		type,    		
+    		state,    		
+    		fws_id,    		
+    		kehu_id,    		
+    		mpcenter_id,    		
+    		ksdate,    		
+    		jsdate,    		
+    		zj,    		
+    		zsj    		 
+    	)
+    	values
+    	<foreach collection="list" item="item" index="index"  separator=",">  	
+		(
+    		
+			default,    		
+			#{item.type,jdbcType=VARCHAR},    		
+			#{item.state,jdbcType=VARCHAR},    		
+			#{item.fwsId,jdbcType=VARCHAR},    		
+			#{item.kehuId,jdbcType=VARCHAR},    		
+			#{item.mpcenterId,jdbcType=VARCHAR},    		
+			#{item.ksdate,jdbcType=VARCHAR},    		
+			#{item.jsdate,jdbcType=VARCHAR},    		
+			#{item.zj,jdbcType=VARCHAR},    		
+			#{item.zsj,jdbcType=VARCHAR}    		
+    	)
+    	</foreach>
+    </insert>
+    
+  	<update id="updateOrders" parameterType="com.bky.model.Orders" flushCache="true">
+  		update orders
+  	set 
+  	
+  		   	
+  		type = #{type,jdbcType=VARCHAR},  	
+  		state = #{state,jdbcType=VARCHAR},  	
+  		fws_id = #{fwsId,jdbcType=VARCHAR},  	
+  		kehu_id = #{kehuId,jdbcType=VARCHAR},  	
+  		mpcenter_id = #{mpcenterId,jdbcType=VARCHAR},  	
+  		ksdate = #{ksdate,jdbcType=VARCHAR},  	
+  		jsdate = #{jsdate,jdbcType=VARCHAR},  	
+  		zj = #{zj,jdbcType=VARCHAR},  	
+  		zsj = #{zsj,jdbcType=VARCHAR}  	
+  	where
+  	
+  		tid = #{tid}  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	
+  		  	  		
+  	</update>
+  	
+  	<delete id="deleteOrders" parameterType="com.bky.model.Orders" flushCache="true">
+  		delete from orders where 11=1
+  		
+  		<if test="tid!=null and tid != ''">
+  			or tid = #{tid}
+  		</if>
+  	  		
+  		<if test="type!=null and type != ''">
+  			or type = #{type}
+  		</if>
+  	  		
+  		<if test="state!=null and state != ''">
+  			or state = #{state}
+  		</if>
+  	  		
+  		<if test="fwsId!=null and fwsId != ''">
+  			or fws_id = #{fwsId}
+  		</if>
+  	  		
+  		<if test="kehuId!=null and kehuId != ''">
+  			or kehu_id = #{kehuId}
+  		</if>
+  	  		
+  		<if test="mpcenterId!=null and mpcenterId != ''">
+  			or mpcenter_id = #{mpcenterId}
+  		</if>
+  	  		
+  		<if test="ksdate!=null and ksdate != ''">
+  			or ksdate = #{ksdate}
+  		</if>
+  	  		
+  		<if test="jsdate!=null and jsdate != ''">
+  			or jsdate = #{jsdate}
+  		</if>
+  	  		
+  		<if test="zj!=null and zj != ''">
+  			or zj = #{zj}
+  		</if>
+  	  		
+  		<if test="zsj!=null and zsj != ''">
+  			or zsj = #{zsj}
+  		</if>
+  	  	
+  	</delete>
+  	
+    <select id="queryOrderss" parameterType="com.bky.model.Orders" resultMap="OrdersResultMap">
+    	select * from orders where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="type != null and type != ''">  
+    		 and type like '%${ type }%'
+    	</if>
+    	    	    	
+    	<if test="state != null and state != ''">  
+    		 and state like '%${ state }%'
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like '%${ fwsId }%'
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like '%${ kehuId }%'
+    	</if>
+    	    	    	
+    	<if test="mpcenterId != null and mpcenterId != ''">  
+    		 and mpcenter_id like '%${ mpcenterId }%'
+    	</if>
+    	    	    	
+    	<if test="ksdate != null and ksdate != ''">  
+    		 and ksdate like '%${ ksdate }%'
+    	</if>
+    	    	    	
+    	<if test="jsdate != null and jsdate != ''">  
+    		 and jsdate like '%${ jsdate }%'
+    	</if>
+    	    	    	
+    	<if test="zj != null and zj != ''">  
+    		 and zj like '%${ zj }%'
+    	</if>
+    	    	    	
+    	<if test="zsj != null and zsj != ''">  
+    		 and zsj like '%${ zsj }%'
+    	</if>
+    	    	 
+    </select>
+    
+    <select id="queryOrderssByPage" parameterType="com.bky.model.Orders" resultMap="OrdersResultMap">
+    	select * from  orders where 1=1
+		    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like  '%${ tid }%' 
+    	</if>
+    	    	    	
+    	<if test="type != null and type != ''">  
+    		 and type like  '%${ type }%' 
+    	</if>
+    	    	    	
+    	<if test="state != null and state != ''">  
+    		 and state like  '%${ state }%' 
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like  '%${ fwsId }%' 
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like  '%${ kehuId }%' 
+    	</if>
+    	    	    	
+    	<if test="mpcenterId != null and mpcenterId != ''">  
+    		 and mpcenter_id like  '%${ mpcenterId }%' 
+    	</if>
+    	    	    	
+    	<if test="ksdate != null and ksdate != ''">  
+    		 and ksdate like  '%${ ksdate }%' 
+    	</if>
+    	    	    	
+    	<if test="jsdate != null and jsdate != ''">  
+    		 and jsdate like  '%${ jsdate }%' 
+    	</if>
+    	    	    	
+    	<if test="zj != null and zj != ''">  
+    		 and zj like  '%${ zj }%' 
+    	</if>
+    	    	    	
+    	<if test="zsj != null and zsj != ''">  
+    		 and zsj like  '%${ zsj }%' 
+    	</if>
+    	    			
+ 
+    </select>
+    
+    <select id="queryOrdersById" parameterType="HashMap" resultMap="OrdersResultMap">
+   	 	select * from orders where  tid = #{ordersId}  
+    </select>
+    
+    <select id="getOrdersCount" parameterType="com.bky.model.Orders" resultType="Integer">
+   	 	select count(*) from orders where 1=1
+    	    	
+    	<if test="tid != null and tid != ''">  
+    		 and tid like '%${ tid }%'
+    	</if>
+    	    	    	
+    	<if test="type != null and type != ''">  
+    		 and type like '%${ type }%'
+    	</if>
+    	    	    	
+    	<if test="state != null and state != ''">  
+    		 and state like '%${ state }%'
+    	</if>
+    	    	    	
+    	<if test="fwsId != null and fwsId != ''">  
+    		 and fws_id like '%${ fwsId }%'
+    	</if>
+    	    	    	
+    	<if test="kehuId != null and kehuId != ''">  
+    		 and kehu_id like '%${ kehuId }%'
+    	</if>
+    	    	    	
+    	<if test="mpcenterId != null and mpcenterId != ''">  
+    		 and mpcenter_id like '%${ mpcenterId }%'
+    	</if>
+    	    	    	
+    	<if test="ksdate != null and ksdate != ''">  
+    		 and ksdate like '%${ ksdate }%'
+    	</if>
+    	    	    	
+    	<if test="jsdate != null and jsdate != ''">  
+    		 and jsdate like '%${ jsdate }%'
+    	</if>
+    	    	    	
+    	<if test="zj != null and zj != ''">  
+    		 and zj like '%${ zj }%'
+    	</if>
+    	    	    	
+    	<if test="zsj != null and zsj != ''">  
+    		 and zsj like '%${ zsj }%'
+    	</if>
+    	    	    </select>
+    
+    
+</mapper>
