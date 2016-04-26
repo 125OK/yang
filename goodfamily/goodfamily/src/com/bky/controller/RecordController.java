@@ -36,6 +36,8 @@ public class RecordController {
 	{
 		dg d = new dg();
 		try {
+			record.setRows(record.getPage()*record.getRows());
+			record.setPage((record.getPage()-1)*record.getRows());
 			d.setRows(recordService.queryRecordsByPage(record));
 		    d.setTotal(recordService.getRecordCount(record));;
 		} catch (NumberFormatException e) {

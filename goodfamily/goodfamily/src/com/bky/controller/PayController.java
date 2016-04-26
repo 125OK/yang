@@ -36,6 +36,8 @@ public class PayController {
 	{
 		dg d = new dg();
 		try {
+			pay.setRows(pay.getPage()*pay.getRows());
+			pay.setPage((pay.getPage()-1)*pay.getRows());
 			d.setRows(payService.queryPaysByPage(pay));
 		    d.setTotal(payService.getPayCount(pay));;
 		} catch (NumberFormatException e) {

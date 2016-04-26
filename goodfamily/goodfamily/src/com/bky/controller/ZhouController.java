@@ -36,6 +36,8 @@ public class ZhouController {
 	{
 		dg d = new dg();
 		try {
+			zhou.setRows(zhou.getPage()*zhou.getRows());
+			zhou.setPage((zhou.getPage()-1)*zhou.getRows());
 			d.setRows(zhouService.queryZhousByPage(zhou));
 		    d.setTotal(zhouService.getZhouCount(zhou));;
 		} catch (NumberFormatException e) {

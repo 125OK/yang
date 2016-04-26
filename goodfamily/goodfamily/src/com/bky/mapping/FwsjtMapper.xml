@@ -224,7 +224,7 @@
     		 and remark like  '%${ remark }%' 
     	</if>
     	    			
- 
+  and tid limit ${page},${rows} 
     </select>
     
     <select id="queryFwsjtById" parameterType="HashMap" resultMap="FwsjtResultMap">

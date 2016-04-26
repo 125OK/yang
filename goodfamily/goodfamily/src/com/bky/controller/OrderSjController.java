@@ -36,6 +36,8 @@ public class OrderSjController {
 	{
 		dg d = new dg();
 		try {
+			orderSj.setRows(orderSj.getPage()*orderSj.getRows());
+			orderSj.setPage((orderSj.getPage()-1)*orderSj.getRows());
 			d.setRows(orderSjService.queryOrderSjsByPage(orderSj));
 		    d.setTotal(orderSjService.getOrderSjCount(orderSj));;
 		} catch (NumberFormatException e) {

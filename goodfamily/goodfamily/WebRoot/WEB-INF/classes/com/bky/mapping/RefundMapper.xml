@@ -166,7 +166,7 @@
     	<if test="refundDate != null and refundDate != ''">  
     		 and refund_date like  '%${ refundDate }%' 
     	</if>
-    	    			
+    	    		 and tid limit ${page},${rows} 	
  
     </select>
     

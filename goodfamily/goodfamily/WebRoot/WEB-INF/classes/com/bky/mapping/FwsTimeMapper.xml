@@ -128,7 +128,7 @@
     	<if test="timebId != null and timebId != ''">  
     		 and timeb_id like  '%${ timebId }%' 
     	</if>
-    	    			
+    	    and tid limit ${page},${rows}  			
  
     </select>
     

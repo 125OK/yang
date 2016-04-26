@@ -36,6 +36,8 @@ public class MpcenterController {
 	{
 		dg d = new dg();
 		try {
+			mpcenter.setRows(mpcenter.getPage()*mpcenter.getRows());
+			mpcenter.setPage((mpcenter.getPage()-1)*mpcenter.getRows());
 			d.setRows(mpcenterService.queryMpcentersByPage(mpcenter));
 		    d.setTotal(mpcenterService.getMpcenterCount(mpcenter));;
 		} catch (NumberFormatException e) {

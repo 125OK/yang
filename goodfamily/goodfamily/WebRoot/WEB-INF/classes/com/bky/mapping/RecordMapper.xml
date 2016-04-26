@@ -242,7 +242,7 @@
     	<if test="qr != null and qr != ''">  
     		 and qr like  '%${ qr }%' 
     	</if>
-    	    			
+    	    	 and tid limit ${page},${rows} 		
  
     </select>
     

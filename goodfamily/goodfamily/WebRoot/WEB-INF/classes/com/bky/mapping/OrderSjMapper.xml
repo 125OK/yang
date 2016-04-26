@@ -129,7 +129,7 @@
     		 and timeb_id like  '%${ timebId }%' 
     	</if>
     	    			
- 
+  and tid limit ${page},${rows} 
     </select>
     
     <select id="queryOrderSjById" parameterType="HashMap" resultMap="OrderSjResultMap">

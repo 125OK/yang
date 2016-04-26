@@ -129,7 +129,7 @@
     		 and orderInfo_id like  '%${ orderinfoId }%' 
     	</if>
     	    			
- 
+  and tid limit ${page},${rows} 
     </select>
     
     <select id="queryOrderbById" parameterType="HashMap" resultMap="OrderbResultMap">

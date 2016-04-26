@@ -36,6 +36,8 @@ public class OrderinfoController {
 	{
 		dg d = new dg();
 		try {
+			orderinfo.setRows(orderinfo.getPage()*orderinfo.getRows());
+			orderinfo.setPage((orderinfo.getPage()-1)*orderinfo.getRows());
 			d.setRows(orderinfoService.queryOrderinfosByPage(orderinfo));
 		    d.setTotal(orderinfoService.getOrderinfoCount(orderinfo));;
 		} catch (NumberFormatException e) {

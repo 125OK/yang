@@ -13,7 +13,8 @@
         <result property="yue" column="yue" />        
         <result property="fx" column="fx" />        
         <result property="mj" column="mj" />        
-        <result property="state" column="state" />         
+        <result property="state" column="state" />    
+         <result property="riqi" column="riqi" />      
     </resultMap>
 	
     <insert id="insertKehu" parameterType="com.bky.model.Kehu"  >
@@ -177,14 +178,6 @@
     		 and tid like  '%${ tid }%' 
     	</if>
     	    	    	
-    	<if test="name != null and name != ''">  
-    		 and name like  '%${ name }%' 
-    	</if>
-    	    	    	
-    	<if test="phone != null and phone != ''">  
-    		 and phone like  '%${ phone }%' 
-    	</if>
-    	    	    	
     	<if test="address != null and address != ''">  
     		 and address like  '%${ address }%' 
     	</if>
@@ -201,11 +194,18 @@
     		 and mj like  '%${ mj }%' 
     	</if>
     	    	    	
-    	<if test="state != null and state != ''">  
+    	<if test="state != null">  
     		 and state like  '%${ state }%' 
     	</if>
-    	    			
- 
+    	    <if test="phone != null and phone != '' and riqi != null and riqi != ''">  
+    		 and riqi between '${riqi}' and '${phone}'
+    	</if>			
+        <if test="name != null and name != ''">  
+    		 and name =  '${ name }' 
+    		 or phone =  '${ name }' 
+    	</if>
+    	
+    	 and tid limit ${page},${rows} 
     </select>
     
     <select id="queryKehuById" parameterType="HashMap" resultMap="KehuResultMap">

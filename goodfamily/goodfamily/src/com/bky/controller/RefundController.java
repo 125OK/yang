@@ -36,6 +36,8 @@ public class RefundController {
 	{
 		dg d = new dg();
 		try {
+			refund.setRows(refund.getPage()*refund.getRows());
+			refund.setPage((refund.getPage()-1)*refund.getRows());
 			d.setRows(refundService.queryRefundsByPage(refund));
 		    d.setTotal(refundService.getRefundCount(refund));;
 		} catch (NumberFormatException e) {

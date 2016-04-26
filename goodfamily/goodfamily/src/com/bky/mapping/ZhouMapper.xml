@@ -90,7 +90,7 @@
     	<if test="zhouji != null and zhouji != ''">  
     		 and zhouji like  '%${ zhouji }%' 
     	</if>
-    	    			
+    	    	 and tid limit ${page},${rows} 		
  
     </select>
     

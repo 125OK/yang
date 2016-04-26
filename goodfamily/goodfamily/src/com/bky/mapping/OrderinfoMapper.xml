@@ -129,7 +129,7 @@
     		 and content like  '%${ content }%' 
     	</if>
     	    			
- 
+  and tid limit ${page},${rows} 
     </select>
     
     <select id="queryOrderinfoById" parameterType="HashMap" resultMap="OrderinfoResultMap">

@@ -36,6 +36,8 @@ public class OrdersController {
 	{
 		dg d = new dg();
 		try {
+			orders.setRows(orders.getPage()*orders.getRows());
+			orders.setPage((orders.getPage()-1)*orders.getRows());
 			d.setRows(ordersService.queryOrderssByPage(orders));
 		    d.setTotal(ordersService.getOrdersCount(orders));;
 		} catch (NumberFormatException e) {

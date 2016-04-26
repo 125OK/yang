@@ -36,6 +36,8 @@ public class KehuController {
 	{
 		dg d = new dg();
 		try {
+			kehu.setRows(kehu.getPage()*kehu.getRows());
+			kehu.setPage((kehu.getPage()-1)*kehu.getRows());
 			d.setRows(kehuService.queryKehusByPage(kehu));
 		    d.setTotal(kehuService.getKehuCount(kehu));;
 		} catch (NumberFormatException e) {

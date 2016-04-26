@@ -36,6 +36,8 @@ public class FwsController {
 	{
 		dg d = new dg();
 		try {
+			fws.setRows(fws.getPage()*fws.getRows());
+			fws.setPage((fws.getPage()-1)*fws.getRows());
 			d.setRows(fwsService.queryFwssByPage(fws));
 		    d.setTotal(fwsService.getFwsCount(fws));;
 		} catch (NumberFormatException e) {

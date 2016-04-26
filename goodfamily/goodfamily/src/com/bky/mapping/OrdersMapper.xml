@@ -243,7 +243,7 @@
     		 and zsj like  '%${ zsj }%' 
     	</if>
     	    			
- 
+  and tid limit ${page},${rows} 
     </select>
     
     <select id="queryOrdersById" parameterType="HashMap" resultMap="OrdersResultMap">

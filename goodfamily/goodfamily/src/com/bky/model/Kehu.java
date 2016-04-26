@@ -1,6 +1,6 @@
 package com.bky.model;
 
-import java.util.Date;
+
 
 public class Kehu implements java.io.Serializable{
   
@@ -18,9 +18,11 @@ public class Kehu implements java.io.Serializable{
   
      private String mj; //面积
   
-     private String state; //状�?
+     private String state; //状�?
+     
+     private String riqi;
   
-     private int page=1;//分页查询�?��
+     private int page=1;//分页查询�?��
      
      private int rows=10;//分页查询结束
    
@@ -102,5 +104,15 @@ public class Kehu implements java.io.Serializable{
 	
 	public void setRows(int rows) {
 		this.rows = rows;
-	} 
+	}
+
+	public String getRiqi() {
+		return riqi;
+	}
+
+	public void setRiqi(String riqi) {
+		this.riqi = riqi;
+	}
+
+	
 }

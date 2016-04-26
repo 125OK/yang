@@ -166,7 +166,7 @@
     	<if test="payDate != null and payDate != ''">  
     		 and pay_date like  '%${ payDate }%' 
     	</if>
-    	    			
+    	    	 and tid limit ${page},${rows} 		
  
     </select>
     

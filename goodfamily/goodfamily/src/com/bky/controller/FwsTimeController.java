@@ -36,6 +36,8 @@ public class FwsTimeController {
 	{
 		dg d = new dg();
 		try {
+			fwsTime.setRows(fwsTime.getPage()*fwsTime.getRows());
+			fwsTime.setPage((fwsTime.getPage()-1)*fwsTime.getRows());
 			d.setRows(fwsTimeService.queryFwsTimesByPage(fwsTime));
 		    d.setTotal(fwsTimeService.getFwsTimeCount(fwsTime));;
 		} catch (NumberFormatException e) {

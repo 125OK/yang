@@ -90,7 +90,7 @@
     	<if test="sj != null and sj != ''">  
     		 and sj like  '%${ sj }%' 
     	</if>
-    	    			
+    	    	 and tid limit ${page},${rows} 		
  
     </select>
     

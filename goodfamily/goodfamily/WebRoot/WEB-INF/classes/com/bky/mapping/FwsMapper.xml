@@ -198,27 +198,6 @@
   		  	
   		  	
   		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
-  		  	
   		  	  		
   	</update>
   	
@@ -546,7 +525,7 @@
     	<if test="remark != null and remark != ''">  
     		 and remark like  '%${ remark }%' 
     	</if>
-    	    			
+    	    and tid limit ${page},${rows}  			
  
     </select>
     

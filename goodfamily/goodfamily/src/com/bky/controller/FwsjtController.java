@@ -36,6 +36,8 @@ public class FwsjtController {
 	{
 		dg d = new dg();
 		try {
+			fwsjt.setRows(fwsjt.getPage()*fwsjt.getRows());
+			fwsjt.setPage((fwsjt.getPage()-1)*fwsjt.getRows());
 			d.setRows(fwsjtService.queryFwsjtsByPage(fwsjt));
 		    d.setTotal(fwsjtService.getFwsjtCount(fwsjt));;
 		} catch (NumberFormatException e) {

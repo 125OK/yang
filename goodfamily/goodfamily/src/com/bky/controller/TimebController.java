@@ -36,6 +36,8 @@ public class TimebController {
 	{
 		dg d = new dg();
 		try {
+			timeb.setRows(timeb.getPage()*timeb.getRows());
+			timeb.setPage((timeb.getPage()-1)*timeb.getRows());
 			d.setRows(timebService.queryTimebsByPage(timeb));
 		    d.setTotal(timebService.getTimebCount(timeb));;
 		} catch (NumberFormatException e) {

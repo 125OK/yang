@@ -52,7 +52,7 @@ $(function(){
     <span><img src="main/images/leftico01.png" /></span>信息管理
     </div>
     	<ul class="menuson">
-        <li><cite></cite><a href="customer/kehu.jsp" target="rightFrame">客户信息管理</a><i></i></li>
+        <li><cite></cite><a href="info/customer.jsp" target="rightFrame">客户信息管理</a><i></i></li>
         <li><cite></cite><a href="customer/kehu.jsp" target="rightFrame">服务师信息管理</a><i></i></li>
         <li><cite></cite><a href="customer/kehu.jsp" target="rightFrame">培训中心信息管理</a><i></i></li>
         <li><cite></cite><a href="customer/kehu.jsp" target="rightFrame">门店信息管理</a><i></i></li>
