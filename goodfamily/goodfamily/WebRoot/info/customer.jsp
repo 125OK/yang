@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			日期：<input id="riqi" type="text" class="easyui-datebox">&nbsp;&nbsp; -- &nbsp;&nbsp;<input id="phone" type="text" class="easyui-datebox">
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			状态：<select id="state" class="easyui-combobox" name="state" style="width:200px;">
+			状态：<select id="state" class="easyui-combobox" name="state" style="width:180px;">
 					    <option value="">全部</option>
 					    <option value="订单客户">订单客户</option>
 					    <option value="需求客户">需求客户</option>
