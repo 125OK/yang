@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div class="p5 bg-eee">
 			<div class="box-tool">
-				 <a id="btn" class="easyui-linkbutton btn-submit" onclick="addUser()">增加</a> 
+				 <a id="btn" class="easyui-linkbutton btn-submit" onclick="addUser()">客户详情</a> 
 				 <a id="btn" class="easyui-linkbutton btn-reset" onclick="updateUser()">修改</a>
 				<a id="btn" class="easyui-linkbutton btn-red" onclick="deleteUser()">删除</a>
 				<a id="btn" class="easyui-linkbutton btn-reset" onclick="refresh()">刷新</a>
@@ -55,7 +55,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<table id="dg"></table>
  <script type="text/javascript">
  var a= window.parent.document.getElementById("rightFrame").offsetHeight-document.getElementById("yang").offsetHeight;
-	
 	$(function() { 
 		$('#dg').datagrid({
 			url : "queryKehuList.do",
